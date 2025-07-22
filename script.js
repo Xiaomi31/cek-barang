@@ -1,0 +1,51 @@
+let dataExcel = [];
+
+// Ganti URL ini dengan URL raw GitHub kamu
+const excelURL = "https://raw.githubusercontent.com/username/repo/main/barcode.xlsx";
+
+fetch(excelURL)
+  .then(response => response.arrayBuffer())
+  .then(data => {
+    const workbook = XLSX.read(data, { type: "array" });
+    const sheetName = workbook.SheetNames[0];
+    const sheet = workbook.Sheets[sheetName];
+    dataExcel = XLSX.utils.sheet_to_json(sheet);
+    console.log("Database berhasil dimuat dari GitHub! Baris:", dataExcel.length);
+  })
+  .catch(err => {
+    console.error("Gagal ambil file Excel dari GitHub:", err.message);
+  });
+
+document.getElementById('excelFile').addEventListener('change', function(e) {
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    const data = new Uint8Array(e.target.result);
+    const workbook = XLSX.read(data, {type: 'array'});
+    const sheetName = workbook.SheetNames[0];
+    const sheet = workbook.Sheets[sheetName];
+    dataExcel = XLSX.utils.sheet_to_json(sheet);
+    alert("Database berhasil diupload! Baris: " + dataExcel.length);
+  };
+  reader.readAsArrayBuffer(e.target.files[0]);
+});
+
+function searchPLU() {
+  const input = document.getElementById('searchInput').value.trim();
+  const result = dataExcel.find(row => row.PLU == input || row.BARCODE == input);
+  const resultDiv = document.getElementById('result');
+
+  if (result) {
+    resultDiv.innerHTML = `
+      <strong>Deskripsi:</strong> ${result.DESC}<br>
+      <strong>SUPCO:</strong> ${result.SUPCO}<br>
+      <strong>Supplier:</strong> ${result.SUPPLIER}<br>
+      <strong>KDSB:</strong> ${result.KDSB}<br>
+      <strong>COVERAGE:</strong> ${result.COVERAGE}<br>
+      <strong>TAG:</strong> ${result.TAG}<br>
+      <strong>PTAG:</strong> ${result.PTAG}<br>
+      <strong>STOK_02:</strong> ${result.STOK_02}
+    `;
+  } else {
+    resultDiv.innerHTML = "Data tidak ditemukan.";
+  }
+}
