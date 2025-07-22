@@ -42,10 +42,17 @@ function searchPLU() {
       <strong>KDSB:</strong> ${result.KDSB}<br>
       <strong>COVERAGE:</strong> ${result.COVERAGE}<br>
       <strong>TAG:</strong> ${result.TAG}<br>
-      <strong>PTAG:</strong> ${result.PTAG}<br>
+      <strong>PTAG:</strong> ${formatTanggal(result.PTAG)}<br>
       <strong>STOK_02:</strong> ${result.STOK_02}
     `;
   } else {
     resultDiv.innerHTML = "Data tidak ditemukan.";
   }
+}
+
+function formatTanggal(nilai) {
+  const date = new Date(nilai);
+  if (isNaN(date)) return nilai;
+  const options = { day: '2-digit', month: 'short', year: 'numeric' };
+  return date.toLocaleDateString('en-GB', options).replace(/ /g, '-');
 }
