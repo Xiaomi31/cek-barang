@@ -51,28 +51,9 @@ function searchPLU() {
 }
 
 function formatTanggal(nilai) {
-  if (typeof nilai === 'number') {
-    // Excel date serial (misal: 45123)
-    const excelEpoch = new Date(Date.UTC(1899, 11, 30));
-    const result = new Date(excelEpoch.getTime() + nilai * 86400000);
-    return formatDateObj(result);
-  }
+  const date = new Date(nilai);
+  if (isNaN(date)) return nilai; // jika bukan tanggal, tampilkan apa adanya
 
-  if (typeof nilai === 'string' && /^\d{1,2}\/\d{1,2}\/\d{4}$/.test(nilai)) {
-    // Pecah manual dd/mm/yyyy atau mm/dd/yyyy
-    const parts = nilai.split('/');
-    const day = parseInt(parts[0]);
-    const month = parseInt(parts[1]) - 1; // 0-indexed
-    const year = parseInt(parts[2]);
-    const date = new Date(year, month, day);
-    return formatDateObj(date);
-  }
-
-  const tryDate = new Date(nilai);
-  return isNaN(tryDate) ? nilai : formatDateObj(tryDate);
-}
-
-function formatDateObj(date) {
   const options = { day: '2-digit', month: 'short', year: 'numeric' };
   return date.toLocaleDateString('en-GB', options).replace(/ /g, '-');
 }
