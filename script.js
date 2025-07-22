@@ -16,8 +16,6 @@ fetch(excelURL)
     console.error("Gagal ambil file Excel dari GitHub:", err.message);
   });
 
-document.getElementById('excelFile').addEventListener('change', function(e) {
-  const reader = new FileReader();
   reader.onload = function(e) {
     const data = new Uint8Array(e.target.result);
     const workbook = XLSX.read(data, {type: 'array', cellDates: false});
