@@ -16,17 +16,6 @@ fetch(excelURL)
     console.error("Gagal ambil file Excel dari GitHub:", err.message);
   });
 
-  reader.onload = function(e) {
-    const data = new Uint8Array(e.target.result);
-    const workbook = XLSX.read(data, {type: 'array', cellDates: false});
-    const sheetName = workbook.SheetNames[0];
-    const sheet = workbook.Sheets[sheetName];
-    dataExcel = XLSX.utils.sheet_to_json(sheet, { raw: true });
-    alert("Database berhasil diupload! Baris: " + dataExcel.length);
-  };
-  reader.readAsArrayBuffer(e.target.files[0]);
-});
-
 function searchPLU() {
   const input = document.getElementById('searchInput').value.trim();
   const result = dataExcel.find(row => row.PLU == input || row.BARCODE == input);
