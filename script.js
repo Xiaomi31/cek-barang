@@ -51,9 +51,24 @@ function searchPLU() {
 }
 
 function formatTanggal(nilai) {
-  const date = new Date(nilai);
-  if (isNaN(date)) return nilai; // jika bukan tanggal, tampilkan apa adanya
+  if (typeof nilai === 'number') {
+    // Excel serial number to JS Date
+    const excelEpoch = new Date(Date.UTC(1899, 11, 30));
+    const result = new Date(excelEpoch.getTime() + nilai * 86400000);
+    return formatDateObj(result);
+  }
 
+  if (typeof nilai === 'string' && /^\d{1,2}\/\d{1,2}\/\d{4}$/.test(nilai)) {
+    const [day, month, year] = nilai.split('/').map(Number);
+    const result = new Date(year, month - 1, day);
+    return formatDateObj(result);
+  }
+
+  const parsedDate = new Date(nilai);
+  return isNaN(parsedDate) ? nilai : formatDateObj(parsedDate);
+}
+
+function formatDateObj(date) {
   const options = { day: '2-digit', month: 'short', year: 'numeric' };
   return date.toLocaleDateString('en-GB', options).replace(/ /g, '-');
 }
