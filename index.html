@@ -1,19 +1,114 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <title>Cek PLU</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cek Barang via PLU / Barcode</title>
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background: #f5f5f5;
+    }
+    h1 {
+      text-align: center;
+    }
+    #searchInput {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+    }
+    button {
+      margin-top: 10px;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    #result {
+      margin-top: 20px;
+      padding: 15px;
+      background-color: #fff;
+      border: 1px solid #ccc;
+    }
+    strong {
+      color: #333;
+    }
+  </style>
 </head>
 <body>
-  <h1>Cek PLU / Barcode</h1>
-
-  <input type="text" id="searchInput" placeholder="Masukkan PLU / Barcode" />
+  <h1>Cek Data Barang</h1>
+  <input type="text" id="searchInput" placeholder="Masukkan PLU atau Barcode" />
   <button onclick="searchPLU()">Cari</button>
+  <div id="result">Masukkan kode untuk mencari barang.</div>
 
-  <div id="result"></div>
+  <script>
+    let dataExcel = [];
 
-  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
-  <script src="script.js"></script>
+    const excelURL = "barcode.xlsx"; // file lokal
+
+    fetch(excelURL)
+      .then(response => response.arrayBuffer())
+      .then(data => {
+        const workbook = XLSX.read(data, { type: "array", cellDates: true });
+        const sheetName = workbook.SheetNames[0];
+        const sheet = workbook.Sheets[sheetName];
+        dataExcel = XLSX.utils.sheet_to_json(sheet, { raw: true });
+        console.log("Database berhasil dimuat! Jumlah data:", dataExcel.length);
+      })
+      .catch(err => {
+        console.error("Gagal mengambil Excel:", err.message);
+        document.getElementById('result').innerText = "Gagal memuat data dari file Excel.";
+      });
+
+    function searchPLU() {
+      const input = document.getElementById('searchInput').value.trim();
+      const resultDiv = document.getElementById('result');
+
+      if (!input) {
+        resultDiv.innerHTML = "Silakan masukkan PLU atau BARCODE.";
+        return;
+      }
+
+      const result = dataExcel.find(row =>
+        row.PLU == input || row.BARCODE == input
+      );
+
+      if (result) {
+        resultDiv.innerHTML = `
+          <strong>Deskripsi:</strong> ${result.DESC || '-'}<br>
+          <strong>SUPCO:</strong> ${result.SUPCO || '-'}<br>
+          <strong>Supplier:</strong> ${result.SUPPLIER || '-'}<br>
+          <strong>KDSB:</strong> ${result.KDSB || '-'}<br>
+          <strong>COVERAGE:</strong> ${result.COVERAGE || '-'}<br>
+          <strong>TAG:</strong> ${result.TAG || '-'}<br>
+          <strong>PTAG:</strong> ${formatTanggal(result.PTAG)}<br>
+          <strong>STOK_02:</strong> ${result.STOK_02 || '-'}
+        `;
+      } else {
+        resultDiv.innerHTML = "Data tidak ditemukan.";
+      }
+    }
+
+    function formatTanggal(nilai) {
+      if (!nilai) return '-';
+      if (typeof nilai === 'number') {
+        const excelEpoch = new Date(Date.UTC(1899, 11, 30));
+        const result = new Date(excelEpoch.getTime() + nilai * 86400000);
+        return formatDateObj(result);
+      }
+      if (typeof nilai === 'string' && /^\d{1,2}\/\d{1,2}\/\d{4}$/.test(nilai)) {
+        const [day, month, year] = nilai.split('/').map(Number);
+        return formatDateObj(new Date(year, month - 1, day));
+      }
+      const parsedDate = new Date(nilai);
+      return isNaN(parsedDate) ? nilai : formatDateObj(parsedDate);
+    }
+
+    function formatDateObj(date) {
+      const options = { day: '2-digit', month: 'short', year: 'numeric' };
+      return date.toLocaleDateString('en-GB', options).replace(/ /g, '-');
+    }
+  </script>
 </body>
 </html>
