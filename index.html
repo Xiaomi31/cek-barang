@@ -3,8 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Cek Barang via PLU / Barcode</title>
+  <title>Cek Barang via Barcode / PLU</title>
   <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+  <script src="https://unpkg.com/html5-qrcode"></script>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -31,6 +32,10 @@
       background-color: #fff;
       border: 1px solid #ccc;
     }
+    #reader {
+      width: 100%;
+      margin-top: 20px;
+    }
     strong {
       color: #333;
     }
@@ -40,12 +45,14 @@
   <h1>Cek Data Barang</h1>
   <input type="text" id="searchInput" placeholder="Masukkan PLU atau Barcode" />
   <button onclick="searchPLU()">Cari</button>
-  <div id="result">Masukkan kode untuk mencari barang.</div>
+  <button onclick="startScanner()">Scan Barcode</button>
+  <div id="reader"></div>
+  <div id="result">Masukkan kode atau scan barcode untuk mencari barang.</div>
 
   <script>
     let dataExcel = [];
 
-    const excelURL = "barcode.xlsx"; // file lokal
+    const excelURL = "barcode.xlsx";
 
     fetch(excelURL)
       .then(response => response.arrayBuffer())
@@ -61,8 +68,8 @@
         document.getElementById('result').innerText = "Gagal memuat data dari file Excel.";
       });
 
-    function searchPLU() {
-      const input = document.getElementById('searchInput').value.trim();
+    function searchPLU(inputManual = null) {
+      const input = inputManual || document.getElementById('searchInput').value.trim();
       const resultDiv = document.getElementById('result');
 
       if (!input) {
@@ -108,6 +115,25 @@
     function formatDateObj(date) {
       const options = { day: '2-digit', month: 'short', year: 'numeric' };
       return date.toLocaleDateString('en-GB', options).replace(/ /g, '-');
+    }
+
+    function startScanner() {
+      const html5QrCode = new Html5Qrcode("reader");
+      const config = { fps: 10, qrbox: 250 };
+
+      html5QrCode.start(
+        { facingMode: "environment" },
+        config,
+        (decodedText, decodedResult) => {
+          document.getElementById("searchInput").value = decodedText;
+          html5QrCode.stop();
+          document.getElementById("reader").innerHTML = "";
+          searchPLU(decodedText);
+        },
+        (errorMessage) => {}
+      ).catch(err => {
+        document.getElementById("result").innerText = "Gagal membuka kamera: " + err;
+      });
     }
   </script>
 </body>
