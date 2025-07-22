@@ -6,10 +6,10 @@ const excelURL = "https://raw.githubusercontent.com/username/repo/main/barcode.x
 fetch(excelURL)
   .then(response => response.arrayBuffer())
   .then(data => {
-    const workbook = XLSX.read(data, { type: "array" });
+    const workbook = XLSX.read(data, { type: "array", cellDates: false });
     const sheetName = workbook.SheetNames[0];
     const sheet = workbook.Sheets[sheetName];
-    dataExcel = XLSX.utils.sheet_to_json(sheet);
+    dataExcel = XLSX.utils.sheet_to_json(sheet, { raw: true });
     console.log("Database berhasil dimuat dari GitHub! Baris:", dataExcel.length);
   })
   .catch(err => {
@@ -20,10 +20,10 @@ document.getElementById('excelFile').addEventListener('change', function(e) {
   const reader = new FileReader();
   reader.onload = function(e) {
     const data = new Uint8Array(e.target.result);
-    const workbook = XLSX.read(data, {type: 'array'});
+    const workbook = XLSX.read(data, {type: 'array', cellDates: false});
     const sheetName = workbook.SheetNames[0];
     const sheet = workbook.Sheets[sheetName];
-    dataExcel = XLSX.utils.sheet_to_json(sheet);
+    dataExcel = XLSX.utils.sheet_to_json(sheet, { raw: true });
     alert("Database berhasil diupload! Baris: " + dataExcel.length);
   };
   reader.readAsArrayBuffer(e.target.files[0]);
@@ -52,7 +52,6 @@ function searchPLU() {
 
 function formatTanggal(nilai) {
   if (typeof nilai === 'number') {
-    // Excel serial number to JS Date
     const excelEpoch = new Date(Date.UTC(1899, 11, 30));
     const result = new Date(excelEpoch.getTime() + nilai * 86400000);
     return formatDateObj(result);
