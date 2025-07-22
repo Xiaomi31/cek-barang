@@ -8,45 +8,103 @@
   <script src="https://unpkg.com/html5-qrcode"></script>
   <style>
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
       padding: 20px;
-      background: #f5f5f5;
+      background: #f0f2f5;
+      color: #333;
     }
+
     h1 {
       text-align: center;
+      color: #333;
+      margin-bottom: 30px;
     }
-    #searchInput {
-      width: 100%;
-      padding: 10px;
+
+    #searchSection {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      max-width: 500px;
+      margin: auto;
+    }
+
+    input, button {
+      padding: 12px;
       font-size: 16px;
-    }
-    button {
-      margin-top: 10px;
-      padding: 10px 20px;
-      font-size: 16px;
-      cursor: pointer;
-    }
-    #result {
-      margin-top: 20px;
-      padding: 15px;
-      background-color: #fff;
+      border-radius: 6px;
       border: 1px solid #ccc;
     }
-    #reader {
-      width: 100%;
-      margin-top: 20px;
+
+    button {
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      transition: background-color 0.3s ease;
     }
-    strong {
-      color: #333;
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    #reader {
+      margin: 20px auto;
+      max-width: 500px;
+    }
+
+    #result {
+      max-width: 600px;
+      margin: 30px auto;
+      background: white;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .data-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 0;
+      border-bottom: 1px solid #eee;
+    }
+
+    .data-item:last-child {
+      border-bottom: none;
+    }
+
+    .label {
+      font-weight: bold;
+      color: #555;
+    }
+
+    .value {
+      text-align: right;
+      color: #000;
+    }
+
+    @media (max-width: 600px) {
+      .data-item {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .value {
+        text-align: left;
+        margin-top: 2px;
+      }
     }
   </style>
 </head>
 <body>
   <h1>Cek Data Barang</h1>
-  <input type="text" id="searchInput" placeholder="Masukkan PLU atau Barcode" />
-  <button onclick="searchPLU()">Cari</button>
-  <button onclick="startScanner()">Scan Barcode</button>
+
+  <div id="searchSection">
+    <input type="text" id="searchInput" placeholder="Masukkan PLU atau Barcode" />
+    <button onclick="searchPLU()">Cari</button>
+    <button onclick="startScanner()">Scan Barcode</button>
+  </div>
+
   <div id="reader"></div>
+
   <div id="result">Masukkan kode atau scan barcode untuk mencari barang.</div>
 
   <script>
@@ -83,17 +141,17 @@
 
       if (result) {
         resultDiv.innerHTML = `
-          <strong>Deskripsi:</strong> ${result.DESC || '-'}<br>
-          <strong>SUPCO:</strong> ${result.SUPCO || '-'}<br>
-          <strong>Supplier:</strong> ${result.SUPPLIER || '-'}<br>
-          <strong>KDSB:</strong> ${result.KDSB || '-'}<br>
-          <strong>COVERAGE:</strong> ${result.COVERAGE || '-'}<br>
-          <strong>TAG:</strong> ${result.TAG || '-'}<br>
-          <strong>PTAG:</strong> ${formatTanggal(result.PTAG)}<br>
-          <strong>STOK_02:</strong> ${result.STOK_02 || '-'}
+          <div class="data-item"><span class="label">Deskripsi</span><span class="value">${result.DESC || '-'}</span></div>
+          <div class="data-item"><span class="label">SUPCO</span><span class="value">${result.SUPCO || '-'}</span></div>
+          <div class="data-item"><span class="label">Supplier</span><span class="value">${result.SUPPLIER || '-'}</span></div>
+          <div class="data-item"><span class="label">KDSB</span><span class="value">${result.KDSB || '-'}</span></div>
+          <div class="data-item"><span class="label">Coverage</span><span class="value">${result.COVERAGE || '-'}</span></div>
+          <div class="data-item"><span class="label">TAG</span><span class="value">${result.TAG || '-'}</span></div>
+          <div class="data-item"><span class="label">PTAG</span><span class="value">${formatTanggal(result.PTAG)}</span></div>
+          <div class="data-item"><span class="label">STOK_02</span><span class="value">${result.STOK_02 || '-'}</span></div>
         `;
       } else {
-        resultDiv.innerHTML = "Data tidak ditemukan.";
+        resultDiv.innerHTML = "<strong>Data tidak ditemukan.</strong>";
       }
     }
 
@@ -114,7 +172,7 @@
 
     function formatDateObj(date) {
       const options = { day: '2-digit', month: 'short', year: 'numeric' };
-      return date.toLocaleDateString('en-GB', options).replace(/ /g, '-');
+      return date.toLocaleDateString('id-ID', options).replace(/ /g, '-');
     }
 
     function startScanner() {
