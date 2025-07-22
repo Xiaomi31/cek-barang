@@ -1,7 +1,7 @@
 let dataExcel = [];
 
 // Ganti URL ini dengan URL raw GitHub kamu
-const excelURL = "https://raw.githubusercontent.com/username/repo/main/barcode.xlsx";
+const excelURL = "https://raw.githubusercontent.com/xiaomi31/cek-barang/main/barcode.xlsx";
 
 fetch(excelURL)
   .then(response => response.arrayBuffer())
