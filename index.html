@@ -11,13 +11,13 @@
       font-family: 'Segoe UI', sans-serif;
       margin: 0;
       padding: 20px;
-      background: #f0f2f5;
-      color: #333;
+      background: #111; /* Background hitam */
+      color: #cfcfcf;   /* Teks abu terang */
     }
 
     h1 {
       text-align: center;
-      color: #333;
+      color: #00ff88;  /* Hijau neon */
       margin-bottom: 30px;
     }
 
@@ -33,18 +33,26 @@
       padding: 12px;
       font-size: 16px;
       border-radius: 6px;
-      border: 1px solid #ccc;
+      border: 1px solid #00ff88;
+      background-color: #1a1a1a;
+      color: #ffffff;
+    }
+
+    input::placeholder {
+      color: #888;
     }
 
     button {
-      background-color: #007BFF;
-      color: white;
-      border: none;
-      transition: background-color 0.3s ease;
+      background-color: #00ff88;
+      color: #000;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s ease;
     }
 
     button:hover {
-      background-color: #0056b3;
+      background-color: #00cc70;
+      transform: scale(1.03);
     }
 
     #reader {
@@ -55,17 +63,17 @@
     #result {
       max-width: 600px;
       margin: 30px auto;
-      background: white;
+      background: #1e1e1e;
       border-radius: 8px;
       padding: 20px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      box-shadow: 0 0 12px rgba(0, 255, 136, 0.3);
     }
 
     .data-item {
       display: flex;
       justify-content: space-between;
       padding: 8px 0;
-      border-bottom: 1px solid #eee;
+      border-bottom: 1px solid #444;
     }
 
     .data-item:last-child {
@@ -74,12 +82,12 @@
 
     .label {
       font-weight: bold;
-      color: #555;
+      color: #00ff88;
     }
 
     .value {
       text-align: right;
-      color: #000;
+      color: #ffffff;
     }
 
     @media (max-width: 600px) {
@@ -151,7 +159,7 @@
           <div class="data-item"><span class="label">STOK_02</span><span class="value">${result.STOK_02 || '-'}</span></div>
         `;
       } else {
-        resultDiv.innerHTML = "<strong>Data tidak ditemukan.</strong>";
+        resultDiv.innerHTML = "<strong style='color: #ff4444;'>Data tidak ditemukan.</strong>";
       }
     }
 
