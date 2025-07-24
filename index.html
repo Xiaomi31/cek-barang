@@ -11,13 +11,13 @@
       font-family: 'Segoe UI', sans-serif;
       margin: 0;
       padding: 20px;
-      background: #111; /* Background hitam */
-      color: #cfcfcf;   /* Teks abu terang */
+      background: #111;
+      color: #cfcfcf;
     }
 
     h1 {
       text-align: center;
-      color: #00ff88;  /* Hijau neon */
+      color: #00ff88;
       margin-bottom: 30px;
     }
 
@@ -29,7 +29,7 @@
       margin: auto;
     }
 
-    input, button {
+    input, button, select {
       padding: 12px;
       font-size: 16px;
       border-radius: 6px;
@@ -107,6 +107,13 @@
 
   <div id="searchSection">
     <input type="text" id="searchInput" placeholder="Masukkan PLU atau Barcode" />
+
+    <select id="lokasiSelect">
+      <option value="baik">Lokasi Baik</option>
+      <option value="retur">Lokasi Retur</option>
+      <option value="rusak">Lokasi Rusak</option>
+    </select>
+
     <button onclick="searchPLU()">Cari</button>
     <button onclick="startScanner()">Scan Barcode</button>
   </div>
@@ -136,6 +143,7 @@
 
     function searchPLU(inputManual = null) {
       const input = inputManual || document.getElementById('searchInput').value.trim();
+      const lokasi = document.getElementById('lokasiSelect').value;
       const resultDiv = document.getElementById('result');
 
       if (!input) {
@@ -157,9 +165,19 @@
           <div class="data-item"><span class="label">Coverage</span><span class="value">${result.COVERAGE || '-'}</span></div>
           <div class="data-item"><span class="label">TAG</span><span class="value">${result.TAG || '-'}</span></div>
           <div class="data-item"><span class="label">PTAG</span><span class="value">${formatTanggal(result.PTAG)}</span></div>
+          <div class="data-item"><span class="label">Lokasi Dipilih</span><span class="value">${lokasiLabel(lokasi)}</span></div>
         `;
       } else {
         resultDiv.innerHTML = "<strong style='color: #ff4444;'>Data tidak ditemukan.</strong>";
+      }
+    }
+
+    function lokasiLabel(val) {
+      switch(val) {
+        case "baik": return "Lokasi Baik";
+        case "retur": return "Lokasi Retur";
+        case "rusak": return "Lokasi Rusak";
+        default: return "-";
       }
     }
 
