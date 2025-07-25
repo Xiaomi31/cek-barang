@@ -11,13 +11,13 @@
       font-family: 'Segoe UI', sans-serif;
       margin: 0;
       padding: 20px;
-      background: #111;
-      color: #cfcfcf;
+      background: #f0f2f5;
+      color: #333;
     }
 
     h1 {
       text-align: center;
-      color: #00ff88;
+      color: #333;
       margin-bottom: 30px;
     }
 
@@ -29,30 +29,22 @@
       margin: auto;
     }
 
-    input, button, select {
+    input, button {
       padding: 12px;
       font-size: 16px;
       border-radius: 6px;
-      border: 1px solid #00ff88;
-      background-color: #1a1a1a;
-      color: #ffffff;
-    }
-
-    input::placeholder {
-      color: #888;
+      border: 1px solid #ccc;
     }
 
     button {
-      background-color: #00ff88;
-      color: #000;
-      font-weight: bold;
-      cursor: pointer;
-      transition: background-color 0.3s ease, transform 0.2s ease;
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      transition: background-color 0.3s ease;
     }
 
     button:hover {
-      background-color: #00cc70;
-      transform: scale(1.03);
+      background-color: #0056b3;
     }
 
     #reader {
@@ -63,17 +55,17 @@
     #result {
       max-width: 600px;
       margin: 30px auto;
-      background: #1e1e1e;
+      background: white;
       border-radius: 8px;
       padding: 20px;
-      box-shadow: 0 0 12px rgba(0, 255, 136, 0.3);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     }
 
     .data-item {
       display: flex;
       justify-content: space-between;
       padding: 8px 0;
-      border-bottom: 1px solid #444;
+      border-bottom: 1px solid #eee;
     }
 
     .data-item:last-child {
@@ -82,12 +74,12 @@
 
     .label {
       font-weight: bold;
-      color: #00ff88;
+      color: #555;
     }
 
     .value {
       text-align: right;
-      color: #ffffff;
+      color: #000;
     }
 
     @media (max-width: 600px) {
@@ -107,7 +99,6 @@
 
   <div id="searchSection">
     <input type="text" id="searchInput" placeholder="Masukkan PLU atau Barcode" />
-
     <button onclick="searchPLU()">Cari</button>
     <button onclick="startScanner()">Scan Barcode</button>
   </div>
@@ -137,7 +128,6 @@
 
     function searchPLU(inputManual = null) {
       const input = inputManual || document.getElementById('searchInput').value.trim();
-      const lokasi = document.getElementById('lokasiSelect').value;
       const resultDiv = document.getElementById('result');
 
       if (!input) {
@@ -151,21 +141,20 @@
 
       if (result) {
         resultDiv.innerHTML = `
-          <div class="data-item"><span class="label">PLU</span><span class="value">${result.PLU || '-'}</span></div>
           <div class="data-item"><span class="label">Deskripsi</span><span class="value">${result.DESC || '-'}</span></div>
           <div class="data-item"><span class="label">SUPCO</span><span class="value">${result.SUPCO || '-'}</span></div>
           <div class="data-item"><span class="label">Supplier</span><span class="value">${result.SUPPLIER || '-'}</span></div>
           <div class="data-item"><span class="label">KDSB</span><span class="value">${result.KDSB || '-'}</span></div>
           <div class="data-item"><span class="label">Coverage</span><span class="value">${result.COVERAGE || '-'}</span></div>
           <div class="data-item"><span class="label">FRAC</span><span class="value">${result.FRAC || '-'}</span></div>
-          <div class="data-item"><span class="label">ACOST</span><span class="value">${result.ACOST || '-'}</span></div>
+          <div class="data-item"><span class="label">ACOST</span><span class="value">${result.ACOST || '-'}</span></div>          
           <div class="data-item"><span class="label">TAG</span><span class="value">${result.TAG || '-'}</span></div>
           <div class="data-item"><span class="label">PTAG</span><span class="value">${formatTanggal(result.PTAG)}</span></div>
-          <div class="data-item"><span class="label">ZONA</span><span class="value">${result.ZONA || '-'}</span></div>
-          <div class="data-item"><span class="label">TABLOK</span><span class="value">${result.TABLOK || '-'}</span></div>     
+          <div class="data-item"><span class="label">ZONA</span><span class="value">${result.ZONA || '-'}</span></div>          
+          <div class="data-item"><span class="label">TABLOK</span><span class="value">${result.TABLOK || '-'}</span></div>
         `;
       } else {
-        resultDiv.innerHTML = "<strong style='color: #ff4444;'>Data tidak ditemukan.</strong>";
+        resultDiv.innerHTML = "<strong>Data tidak ditemukan.</strong>";
       }
     }
 
