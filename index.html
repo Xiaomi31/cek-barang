@@ -161,8 +161,8 @@
           <div class="data-item"><span class="label">ACOST</span><span class="value">${result.ACOST || '-'}</span></div>
           <div class="data-item"><span class="label">TAG</span><span class="value">${result.TAG || '-'}</span></div>
           <div class="data-item"><span class="label">PTAG</span><span class="value">${formatTanggal(result.PTAG)}</span></div>
-          <div class="data-item"><span class="label">ZONA</span><span class="value">${formatTanggal(result.ZONA)}</span></div>
-          <div class="data-item"><span class="label">TABLOK</span><span class="value">${formatTanggal(result.TABLOK)}</span></div>       
+          <div class="data-item"><span class="label">ZONA</span><span class="value">${result.ZONA || '-'}</span></div>
+          <div class="data-item"><span class="label">TABLOK</span><span class="value">${result.TABLOK || '-'}</span></div>     
         `;
       } else {
         resultDiv.innerHTML = "<strong style='color: #ff4444;'>Data tidak ditemukan.</strong>";
