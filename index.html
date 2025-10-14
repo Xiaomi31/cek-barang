@@ -134,16 +134,16 @@
   <script>
     let dataExcel = [];
 
-    const excelURL = "barcode.xlsx"; // pastikan file barcode.xlsx ada di folder yang sama
+    const excelURL = "Master_Barcode.xlsb"; // pastikan file barcode.xlsx ada di folder yang sama
 
     // Load file Excel saat halaman dibuka
     fetch(excelURL)
       .then(response => response.arrayBuffer())
       .then(data => {
-        const workbook = XLSX.read(data, { type: "array", cellDates: true });
+        const workbook = XLSB.read(data, { type: "array", cellDates: true });
         const sheetName = workbook.SheetNames[0];
         const sheet = workbook.Sheets[sheetName];
-        dataExcel = XLSX.utils.sheet_to_json(sheet, { raw: true });
+        dataExcel = XLSB.utils.sheet_to_json(sheet, { raw: true });
         console.log("Database berhasil dimuat! Jumlah data:", dataExcel.length);
       })
       .catch(err => {
