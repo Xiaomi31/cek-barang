@@ -7,6 +7,7 @@
   <link rel="icon" type="image/png" href="https://upload.wikimedia.org/wikipedia/en/thumb/7/70/Kimetsu_no_Yaiba_logo.svg/320px-Kimetsu_no_Yaiba_logo.svg.png">
   <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
   <script src="https://unpkg.com/html5-qrcode"></script>
+
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@500&display=swap');
 
@@ -135,6 +136,7 @@
 
     const excelURL = "barcode.xlsx"; // pastikan file barcode.xlsx ada di folder yang sama
 
+    // Load file Excel saat halaman dibuka
     fetch(excelURL)
       .then(response => response.arrayBuffer())
       .then(data => {
@@ -149,6 +151,7 @@
         document.getElementById('result').innerText = "Gagal memuat data dari file Excel.";
       });
 
+    // Fungsi pencarian PLU / Barcode
     function searchPLU(inputManual = null) {
       const input = inputManual || document.getElementById('searchInput').value.trim();
       const resultDiv = document.getElementById('result');
@@ -163,24 +166,26 @@
       );
 
       if (result) {
-  resultDiv.innerHTML = `
-    <div class="data-item"><span class="label">PLU</span><span class="value">${result.PLU || '-'}</span></div>
-    <div class="data-item"><span class="label">Deskripsi</span><span class="value">${result.DESC || '-'}</span></div>          
-    <div class="data-item"><span class="label">SUPCO</span><span class="value">${result.SUPCO || '-'}</span></div>
-    <div class="data-item"><span class="label">Supplier</span><span class="value">${result.NAMA_SUPPLIER || '-'}</span></div>
-    <div class="data-item"><span class="label">KDSB</span><span class="value">${result.KDSB || '-'}</span></div>
-    <div class="data-item"><span class="label">TAG</span><span class="value">${result.TAG || '-'}</span></div>
-    <div class="data-item"><span class="label">PTAG</span><span class="value">${formatTanggal(result.PTAG)}</span></div>
-    <div class="data-item"><span class="label">Cov</span><span class="value">${result.COVERAGE || '-'}</span></div>
-    <div class="data-item"><span class="label">TABLOK</span><span class="value">${result.TABLOK || '-'}</span></div>          
-    <div class="data-item"><span class="label">LPP_01</span><span class="value">${result.LPP_01_DCI || '-'}</span></div>
-    <div class="data-item"><span class="label">LPP_02</span><span class="value">${result.LPP_02_DCI || '-'}</span></div>
-    <div class="data-item"><span class="label">LPP_03</span><span class="value">${result.LPP_03_DCI || '-'}</span></div>
-  `;
-} else {
-  resultDiv.innerHTML = "<strong>Data tidak ditemukan.</strong>";
-}
+        resultDiv.innerHTML = `
+          <div class="data-item"><span class="label">PLU</span><span class="value">${result.PLU || '-'}</span></div>
+          <div class="data-item"><span class="label">Deskripsi</span><span class="value">${result.DESC || '-'}</span></div>          
+          <div class="data-item"><span class="label">SUPCO</span><span class="value">${result.SUPCO || '-'}</span></div>
+          <div class="data-item"><span class="label">Supplier</span><span class="value">${result.NAMA_SUPPLIER || '-'}</span></div>
+          <div class="data-item"><span class="label">KDSB</span><span class="value">${result.KDSB || '-'}</span></div>
+          <div class="data-item"><span class="label">TAG</span><span class="value">${result.TAG || '-'}</span></div>
+          <div class="data-item"><span class="label">PTAG</span><span class="value">${formatTanggal(result.PTAG)}</span></div>
+          <div class="data-item"><span class="label">Cov</span><span class="value">${result.COVERAGE || '-'}</span></div>
+          <div class="data-item"><span class="label">TABLOK</span><span class="value">${result.TABLOK || '-'}</span></div>          
+          <div class="data-item"><span class="label">LPP_01</span><span class="value">${result.LPP_01_DCI || '-'}</span></div>
+          <div class="data-item"><span class="label">LPP_02</span><span class="value">${result.LPP_02_DCI || '-'}</span></div>
+          <div class="data-item"><span class="label">LPP_03</span><span class="value">${result.LPP_03_DCI || '-'}</span></div>
+        `;
+      } else {
+        resultDiv.innerHTML = "<strong>Data tidak ditemukan.</strong>";
+      }
+    } // ← penting: penutup fungsi searchPLU
 
+    // Format tanggal dari Excel agar tampil seperti 14-Okt-2025
     function formatTanggal(nilai) {
       if (!nilai) return '-';
       if (typeof nilai === 'number') {
@@ -201,6 +206,7 @@
       return date.toLocaleDateString('id-ID', options).replace(/ /g, '-');
     }
 
+    // Fungsi untuk mulai scan barcode
     function startScanner() {
       const html5QrCode = new Html5Qrcode("reader");
       const config = { fps: 10, qrbox: 250 };
