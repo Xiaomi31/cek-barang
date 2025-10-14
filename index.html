@@ -163,23 +163,23 @@
       );
 
       if (result) {
-        resultDiv.innerHTML = `
-          <div class="data-item"><span class="label">PLU</span><span class="value">${result.PLU || '-'}</span></div>
-          <div class="data-item"><span class="label">Deskripsi</span><span class="value">${result.DESC || '-'}</span></div>          
-          <div class="data-item"><span class="label">SUPCO</span><span class="value">${result.SUPCO || '-'}</span></div>
-          <div class="data-item"><span class="label">Supplier</span><span class="value">${result.NAMA_SUPPLIER || '-'}</span></div>
-          <div class="data-item"><span class="label">KDSB</span><span class="value">${result.KDSB || '-'}</span></div>
-          <div class="data-item"><span class="label">TAG</span><span class="value">${result.TAG || '-'}</span></div>
-          <div class="data-item"><span class="label">PTAG</span><span class="value">${formatTanggal(result.PTAG)}</span></div>
-          <div class="data-item"><span class="label">Cov</span><span class="value">${result.COVERAGE || '-'}</span></div>
-          <div class="data-item"><span class="label">TABLOK</span><span class="value">${result.TABLOK || '-'}</span></div>          
-          <div class="data-item"><span class="label">LPP_01</span><span class="value">${result.LPP_01_DCI || '-'}</span></div>
-          <div class="data-item"><span class="label">LPP_02</span><span class="value">${result.LPP_02_DCI || '-'}</span></div>
-          <div class="data-item"><span class="label">LPP_03</span><span class="value">${result.LPP_03_DCI || '-'}</span></div>          
-      } else {
-        resultDiv.innerHTML = "<strong>Data tidak ditemukan.</strong>";
-      }
-    }
+  resultDiv.innerHTML = `
+    <div class="data-item"><span class="label">PLU</span><span class="value">${result.PLU || '-'}</span></div>
+    <div class="data-item"><span class="label">Deskripsi</span><span class="value">${result.DESC || '-'}</span></div>          
+    <div class="data-item"><span class="label">SUPCO</span><span class="value">${result.SUPCO || '-'}</span></div>
+    <div class="data-item"><span class="label">Supplier</span><span class="value">${result.NAMA_SUPPLIER || '-'}</span></div>
+    <div class="data-item"><span class="label">KDSB</span><span class="value">${result.KDSB || '-'}</span></div>
+    <div class="data-item"><span class="label">TAG</span><span class="value">${result.TAG || '-'}</span></div>
+    <div class="data-item"><span class="label">PTAG</span><span class="value">${formatTanggal(result.PTAG)}</span></div>
+    <div class="data-item"><span class="label">Cov</span><span class="value">${result.COVERAGE || '-'}</span></div>
+    <div class="data-item"><span class="label">TABLOK</span><span class="value">${result.TABLOK || '-'}</span></div>          
+    <div class="data-item"><span class="label">LPP_01</span><span class="value">${result.LPP_01_DCI || '-'}</span></div>
+    <div class="data-item"><span class="label">LPP_02</span><span class="value">${result.LPP_02_DCI || '-'}</span></div>
+    <div class="data-item"><span class="label">LPP_03</span><span class="value">${result.LPP_03_DCI || '-'}</span></div>
+  `;
+} else {
+  resultDiv.innerHTML = "<strong>Data tidak ditemukan.</strong>";
+}
 
     function formatTanggal(nilai) {
       if (!nilai) return '-';
