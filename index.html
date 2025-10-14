@@ -133,15 +133,15 @@
   <script>
     let dataExcel = [];
 
-    const excelURL = "barcode.xlsx"; // pastikan file barcode.xlsx ada di folder yang sama
+    const excelURL = "Master_Barcode.xlsb"; // pastikan file barcode.xlsx ada di folder yang sama
 
     fetch(excelURL)
       .then(response => response.arrayBuffer())
       .then(data => {
-        const workbook = XLSX.read(data, { type: "array", cellDates: true });
+        const workbook = XLSB.read(data, { type: "array", cellDates: true });
         const sheetName = workbook.SheetNames[0];
         const sheet = workbook.Sheets[sheetName];
-        dataExcel = XLSX.utils.sheet_to_json(sheet, { raw: true });
+        dataExcel = XLSB.utils.sheet_to_json(sheet, { raw: true });
         console.log("Database berhasil dimuat! Jumlah data:", dataExcel.length);
       })
       .catch(err => {
@@ -167,16 +167,15 @@
           <div class="data-item"><span class="label">PLU</span><span class="value">${result.PLU || '-'}</span></div>
           <div class="data-item"><span class="label">Deskripsi</span><span class="value">${result.DESC || '-'}</span></div>          
           <div class="data-item"><span class="label">SUPCO</span><span class="value">${result.SUPCO || '-'}</span></div>
-          <div class="data-item"><span class="label">Supplier</span><span class="value">${result.SUPPLIER || '-'}</span></div>
+          <div class="data-item"><span class="label">Supplier</span><span class="value">${result.NAMA_SUPPLIER || '-'}</span></div>
           <div class="data-item"><span class="label">KDSB</span><span class="value">${result.KDSB || '-'}</span></div>
-          <div class="data-item"><span class="label">Coverage</span><span class="value">${result.COVERAGE || '-'}</span></div>
-          <div class="data-item"><span class="label">FRAC</span><span class="value">${result.FRAC || '-'}</span></div>
-          <div class="data-item"><span class="label">ACOST</span><span class="value">${result.ACOST || '-'}</span></div>          
           <div class="data-item"><span class="label">TAG</span><span class="value">${result.TAG || '-'}</span></div>
           <div class="data-item"><span class="label">PTAG</span><span class="value">${formatTanggal(result.PTAG)}</span></div>
-          <div class="data-item"><span class="label">ZONA</span><span class="value">${result.ZONA || '-'}</span></div>          
-          <div class="data-item"><span class="label">TABLOK</span><span class="value">${result.TABLOK || '-'}</span></div>
-        `;
+          <div class="data-item"><span class="label">Cov</span><span class="value">${result.COVERAGE || '-'}</span></div>
+          <div class="data-item"><span class="label">TABLOK</span><span class="value">${result.TABLOK || '-'}</span></div>          
+          <div class="data-item"><span class="label">LPP_01</span><span class="value">${result.LPP_01_DCI || '-'}</span></div>
+          <div class="data-item"><span class="label">LPP_02</span><span class="value">${result.LPP_02_DCI || '-'}</span></div>
+          <div class="data-item"><span class="label">LPP_03</span><span class="value">${result.LPP_03_DCI || '-'}</span></div>          
       } else {
         resultDiv.innerHTML = "<strong>Data tidak ditemukan.</strong>";
       }
