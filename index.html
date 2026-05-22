@@ -16,73 +16,87 @@
 
 <style>
 
+/* =========================
+   RESET
+========================= */
+
 *{
   margin:0;
   padding:0;
   box-sizing:border-box;
 }
 
+/* =========================
+   BODY
+========================= */
+
 body{
   font-family:'Poppins',sans-serif;
   min-height:100vh;
   overflow-x:hidden;
+
   background:
-  radial-gradient(circle at top left,#00ffae22 0%,transparent 30%),
-  radial-gradient(circle at bottom right,#00c3ff22 0%,transparent 30%),
-  linear-gradient(135deg,#020617,#071226,#0f172a,#111827);
+  radial-gradient(circle at top left,#34d39922 0%,transparent 28%),
+  radial-gradient(circle at bottom right,#38bdf822 0%,transparent 28%),
+  linear-gradient(135deg,#020617,#0b1120,#111827);
 
   color:white;
 }
 
-/* BACKGROUND EFFECT */
+/* =========================
+   BACKGROUND GLOW
+========================= */
+
+.bg1,
+.bg2,
+.bg3{
+  position:fixed;
+  border-radius:50%;
+  filter:blur(130px);
+  z-index:-1;
+}
 
 .bg1{
-  position:fixed;
-  width:450px;
-  height:450px;
-  background:#00ffaa;
-  filter:blur(150px);
-  opacity:0.15;
-  top:-150px;
+  width:320px;
+  height:320px;
+  background:#22c55e;
+  opacity:0.12;
+  top:-100px;
   left:-100px;
-  border-radius:50%;
-  z-index:-1;
 }
 
 .bg2{
-  position:fixed;
-  width:450px;
-  height:450px;
-  background:#00c3ff;
-  filter:blur(150px);
-  opacity:0.15;
-  bottom:-150px;
+  width:320px;
+  height:320px;
+  background:#0ea5e9;
+  opacity:0.12;
+  bottom:-100px;
   right:-100px;
-  border-radius:50%;
-  z-index:-1;
 }
 
 .bg3{
-  position:fixed;
-  width:300px;
-  height:300px;
+  width:250px;
+  height:250px;
   background:#9333ea;
-  filter:blur(140px);
-  opacity:0.12;
-  top:40%;
-  left:40%;
-  border-radius:50%;
-  z-index:-1;
+  opacity:0.08;
+  top:45%;
+  left:45%;
 }
+
+/* =========================
+   CONTAINER
+========================= */
 
 .container{
   width:100%;
-  max-width:1200px;
+  max-width:1020px;
   margin:auto;
-  padding:30px 20px;
+  padding:18px;
 }
 
-/* PAGE */
+/* =========================
+   PAGE
+========================= */
 
 .page{
   min-height:100vh;
@@ -91,89 +105,120 @@ body{
   justify-content:center;
 }
 
-/* GLASS */
+/* =========================
+   GLASS
+========================= */
 
 .glass{
-  background:rgba(255,255,255,0.08);
-  border:1px solid rgba(255,255,255,0.1);
+  background:rgba(255,255,255,0.06);
+
+  border:1px solid rgba(255,255,255,0.08);
+
   backdrop-filter:blur(18px);
+
   box-shadow:
-  0 10px 40px rgba(0,0,0,0.4),
-  inset 0 0 0 1px rgba(255,255,255,0.05);
+  0 8px 30px rgba(0,0,0,0.35);
 }
 
-/* WELCOME */
+/* =========================
+   WELCOME PAGE
+========================= */
 
 .welcome-box{
   width:100%;
-  max-width:950px;
-  border-radius:35px;
-  padding:70px 50px;
+  max-width:760px;
+
+  border-radius:28px;
+
+  padding:45px 35px;
+
   text-align:center;
-  animation:fadeUp 1s ease;
-  position:relative;
-  overflow:hidden;
+
+  animation:fadeUp .8s ease;
 }
 
 .logo-circle{
-  width:120px;
-  height:120px;
-  margin:auto;
-  border-radius:50%;
-  background:linear-gradient(135deg,#00ffaa,#00c3ff);
+  width:85px;
+  height:85px;
+
+  margin:auto auto 22px;
+
+  border-radius:24px;
+
+  background:
+  linear-gradient(135deg,#22c55e,#06b6d4);
+
   display:flex;
   align-items:center;
   justify-content:center;
-  font-size:50px;
-  box-shadow:0 0 40px rgba(0,255,170,0.4);
-  margin-bottom:30px;
+
+  font-size:36px;
+
+  box-shadow:
+  0 10px 30px rgba(34,197,94,0.25);
 }
 
 .welcome-title{
-  font-size:58px;
-  font-weight:800;
-  line-height:1.1;
-  margin-bottom:20px;
+  font-size:42px;
+  font-weight:700;
+  line-height:1.15;
 
-  background:linear-gradient(to right,#00ffaa,#00c3ff,#ffffff);
+  margin-bottom:16px;
+
+  background:
+  linear-gradient(to right,#22c55e,#38bdf8,#ffffff);
+
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
 }
 
 .welcome-sub{
-  max-width:750px;
+  max-width:620px;
+
   margin:auto;
+
   color:#cbd5e1;
-  line-height:1.9;
-  font-size:18px;
-  margin-bottom:40px;
+
+  line-height:1.8;
+
+  font-size:15px;
+
+  margin-bottom:28px;
 }
 
 .enter-btn{
   border:none;
-  padding:18px 45px;
-  border-radius:60px;
-  font-size:18px;
-  font-weight:700;
+
+  padding:14px 34px;
+
+  border-radius:50px;
+
+  font-size:15px;
+  font-weight:600;
+
   cursor:pointer;
+
   color:white;
 
-  background:linear-gradient(135deg,#00ffaa,#00c3ff);
+  background:
+  linear-gradient(135deg,#22c55e,#06b6d4);
 
-  transition:0.4s;
+  transition:.3s;
 
   box-shadow:
-  0 10px 30px rgba(0,255,170,0.3);
+  0 8px 25px rgba(34,197,94,0.25);
 }
 
 .enter-btn:hover{
-  transform:translateY(-5px) scale(1.03);
+  transform:translateY(-3px);
 
   box-shadow:
-  0 20px 40px rgba(0,255,170,0.4);
+  0 15px 30px rgba(34,197,94,0.3);
 }
 
-/* APP PAGE */
+/* =========================
+   APP PAGE
+========================= */
 
 #appPage{
   display:none;
@@ -181,105 +226,147 @@ body{
 
 .app-wrapper{
   width:100%;
-  animation:fadeUp 0.7s ease;
+  animation:fadeUp .6s ease;
 }
+
+/* =========================
+   TOPBAR
+========================= */
 
 .topbar{
   display:flex;
   justify-content:space-between;
   align-items:center;
 
-  padding:25px 30px;
-  border-radius:25px;
+  padding:18px 24px;
 
-  margin-bottom:30px;
+  border-radius:22px;
+
+  margin-bottom:20px;
 }
 
 .brand{
   display:flex;
   align-items:center;
-  gap:15px;
+  gap:14px;
 }
 
 .brand-icon{
-  width:60px;
-  height:60px;
-  border-radius:18px;
-  background:linear-gradient(135deg,#00ffaa,#00c3ff);
+  width:52px;
+  height:52px;
+
+  border-radius:16px;
+
+  background:
+  linear-gradient(135deg,#22c55e,#06b6d4);
+
   display:flex;
   align-items:center;
   justify-content:center;
-  font-size:28px;
+
+  font-size:22px;
 }
 
 .brand h2{
-  font-size:28px;
+  font-size:22px;
   font-weight:700;
 }
 
 .brand p{
   color:#cbd5e1;
-  font-size:14px;
+  font-size:12px;
 }
 
-/* MAIN GRID */
+/* =========================
+   GRID
+========================= */
 
 .main-grid{
   display:grid;
-  grid-template-columns:420px 1fr;
-  gap:25px;
+  grid-template-columns:320px 1fr;
+  gap:20px;
 }
 
-/* LEFT */
+/* =========================
+   CARD
+========================= */
 
-.search-card{
-  border-radius:28px;
-  padding:30px;
+.search-card,
+.result-card{
+  border-radius:24px;
+  padding:24px;
 }
+
+/* =========================
+   TITLE
+========================= */
 
 .section-title{
-  font-size:28px;
-  margin-bottom:25px;
+  font-size:22px;
   font-weight:700;
+
+  margin-bottom:20px;
 }
+
+/* =========================
+   INPUT
+========================= */
 
 .input-box{
   width:100%;
-  padding:18px;
-  border-radius:18px;
+
+  padding:14px 16px;
+
   border:none;
   outline:none;
-  margin-bottom:18px;
 
-  background:rgba(255,255,255,0.08);
+  border-radius:16px;
+
+  background:rgba(255,255,255,0.06);
 
   color:white;
-  font-size:16px;
 
-  border:1px solid rgba(255,255,255,0.08);
+  font-size:14px;
+
+  margin-bottom:14px;
+
+  border:1px solid rgba(255,255,255,0.06);
+
+  transition:.3s;
 }
 
 .input-box:focus{
-  border:1px solid #00ffaa;
+  border:1px solid #22c55e;
 
   box-shadow:
-  0 0 20px rgba(0,255,170,0.2);
+  0 0 15px rgba(34,197,94,0.18);
 }
 
 .input-box::placeholder{
-  color:#cbd5e1;
+  color:#94a3b8;
 }
+
+/* =========================
+   BUTTON
+========================= */
 
 .btn{
   width:100%;
+
   border:none;
-  padding:16px;
-  border-radius:18px;
+
+  padding:14px;
+
+  border-radius:16px;
+
+  font-size:14px;
+  font-weight:600;
+
   color:white;
-  font-size:16px;
-  font-weight:700;
+
   cursor:pointer;
-  transition:0.3s;
+
+  transition:.3s;
 }
 
 .btn:hover{
@@ -287,82 +374,94 @@ body{
 }
 
 .search-btn{
-  background:linear-gradient(135deg,#00ffaa,#00c3ff);
-  margin-bottom:15px;
+  background:
+  linear-gradient(135deg,#22c55e,#06b6d4);
+
+  margin-bottom:12px;
 }
 
 .scan-btn{
-  background:linear-gradient(135deg,#7c3aed,#ec4899);
+  background:
+  linear-gradient(135deg,#8b5cf6,#ec4899);
 }
+
+/* =========================
+   SCANNER
+========================= */
 
 #reader{
-  margin-top:25px;
+  margin-top:20px;
+
   overflow:hidden;
-  border-radius:20px;
-  border:1px solid rgba(255,255,255,0.1);
+
+  border-radius:18px;
+
+  border:1px solid rgba(255,255,255,0.08);
 }
 
-/* RESULT */
-
-.result-card{
-  border-radius:28px;
-  padding:35px;
-}
+/* =========================
+   RESULT
+========================= */
 
 .result-header{
-  margin-bottom:30px;
+  margin-bottom:24px;
 }
 
 .result-header h2{
-  font-size:32px;
-  margin-bottom:8px;
+  font-size:26px;
+  margin-bottom:5px;
 }
 
 .result-header p{
   color:#cbd5e1;
+  font-size:14px;
 }
 
 .result-grid{
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:18px;
+  gap:14px;
 }
 
 .data-box{
   background:rgba(255,255,255,0.05);
-  border:1px solid rgba(255,255,255,0.06);
 
-  border-radius:20px;
+  border:1px solid rgba(255,255,255,0.05);
 
-  padding:20px;
+  border-radius:18px;
+
+  padding:16px;
 }
 
 .data-label{
   color:#38bdf8;
-  font-size:14px;
-  margin-bottom:8px;
+
+  font-size:12px;
+
+  margin-bottom:6px;
 }
 
 .data-value{
-  font-size:17px;
+  font-size:14px;
   font-weight:600;
+
+  line-height:1.5;
+
   word-break:break-word;
 }
 
-/* MOBILE */
+/* =========================
+   MOBILE
+========================= */
 
-@media(max-width:900px){
+@media(max-width:850px){
 
   .main-grid{
     grid-template-columns:1fr;
   }
 
   .welcome-title{
-    font-size:40px;
-  }
-
-  .welcome-sub{
-    font-size:16px;
+    font-size:34px;
   }
 
   .result-grid{
@@ -371,11 +470,43 @@ body{
 
 }
 
+@media(max-width:500px){
+
+  .welcome-box{
+    padding:35px 24px;
+  }
+
+  .welcome-title{
+    font-size:28px;
+  }
+
+  .welcome-sub{
+    font-size:14px;
+  }
+
+  .topbar{
+    padding:16px;
+  }
+
+  .brand h2{
+    font-size:18px;
+  }
+
+  .section-title{
+    font-size:20px;
+  }
+
+}
+
+/* =========================
+   ANIMATION
+========================= */
+
 @keyframes fadeUp{
 
   from{
     opacity:0;
-    transform:translateY(40px);
+    transform:translateY(35px);
   }
 
   to{
@@ -390,11 +521,15 @@ body{
 
 <body>
 
+<!-- BACKGROUND -->
 <div class="bg1"></div>
 <div class="bg2"></div>
 <div class="bg3"></div>
 
-<!-- PAGE 1 -->
+<!-- =========================
+     PAGE 1
+========================= -->
+
 <div class="page" id="welcomePage">
 
 <div class="container">
@@ -412,7 +547,7 @@ SYSTEM
 
 <p class="welcome-sub">
 
-Selamat datang di sistem pengecekan barang modern dengan tampilan profesional dan teknologi barcode scanner otomatis.
+Selamat datang di sistem pengecekan barang modern.
 
 Cari data produk lebih cepat menggunakan:
 <br><br>
@@ -420,20 +555,24 @@ Cari data produk lebih cepat menggunakan:
 ✔ Barcode Scanner  
 ✔ Pencarian PLU  
 ✔ Database Excel  
-✔ Tampilan Modern Professional  
+✔ Tampilan Professional  
 
 </p>
 
 <button class="enter-btn" onclick="openApp()">
-🚀 MASUK APLIKASI
+🚀 Masuk Aplikasi
 </button>
 
 </div>
 
 </div>
+
 </div>
 
-<!-- PAGE 2 -->
+<!-- =========================
+     PAGE 2
+========================= -->
+
 <div class="page" id="appPage">
 
 <div class="container">
@@ -451,8 +590,13 @@ Cari data produk lebih cepat menggunakan:
 </div>
 
 <div>
+
 <h2>Barcode Checker</h2>
-<p>Sistem Pengecekan Barang Professional</p>
+
+<p>
+Sistem Pengecekan Barang
+</p>
+
 </div>
 
 </div>
@@ -496,10 +640,12 @@ Cari Data
 
 <div class="result-header">
 
-<h2>📄 Detail Barang</h2>
+<h2>
+📄 Detail Barang
+</h2>
 
 <p>
-Hasil pencarian data barang akan tampil di sini
+Hasil pencarian barang akan tampil di sini
 </p>
 
 </div>
@@ -507,8 +653,15 @@ Hasil pencarian data barang akan tampil di sini
 <div class="result-grid" id="result">
 
 <div class="data-box">
-<div class="data-label">Status</div>
-<div class="data-value">Menunggu pencarian...</div>
+
+<div class="data-label">
+STATUS
+</div>
+
+<div class="data-value">
+Menunggu pencarian...
+</div>
+
 </div>
 
 </div>
@@ -525,6 +678,10 @@ Hasil pencarian data barang akan tampil di sini
 
 <script>
 
+/* =========================
+   OPEN APP
+========================= */
+
 function openApp(){
 
 document.getElementById("welcomePage").style.display="none";
@@ -537,6 +694,10 @@ behavior:"smooth"
 });
 
 }
+
+/* =========================
+   DATABASE
+========================= */
 
 let dataExcel = [];
 
@@ -561,50 +722,87 @@ dataExcel = XLSX.utils.sheet_to_json(sheet,{
 raw:true
 });
 
-console.log("Database loaded:",dataExcel.length);
+console.log(
+"Database berhasil dimuat:",
+dataExcel.length
+);
 
 })
 
 .catch(err => {
 
-document.getElementById("result").innerHTML=`
+document.getElementById("result").innerHTML = `
+
 <div class="data-box">
-<div class="data-label">ERROR</div>
+
+<div class="data-label">
+ERROR
+</div>
+
 <div class="data-value">
 Gagal memuat database Excel
 </div>
+
 </div>
+
 `;
 
 });
 
+/* =========================
+   CARD RESULT
+========================= */
+
 function createBox(label,value){
 
 return `
+
 <div class="data-box">
-<div class="data-label">${label}</div>
-<div class="data-value">${value || '-'}</div>
+
+<div class="data-label">
+${label}
 </div>
+
+<div class="data-value">
+${value || '-'}
+</div>
+
+</div>
+
 `;
 
 }
 
+/* =========================
+   SEARCH
+========================= */
+
 function searchPLU(inputManual = null){
 
-const input = inputManual ||
-document.getElementById("searchInput").value.trim();
+const input =
+inputManual ||
+document.getElementById("searchInput")
+.value.trim();
 
-const resultDiv = document.getElementById("result");
+const resultDiv =
+document.getElementById("result");
 
 if(!input){
 
-resultDiv.innerHTML=`
+resultDiv.innerHTML = `
+
 <div class="data-box">
-<div class="data-label">INFO</div>
+
+<div class="data-label">
+INFO
+</div>
+
 <div class="data-value">
 Silakan masukkan barcode atau PLU
 </div>
+
 </div>
+
 `;
 
 return;
@@ -612,7 +810,10 @@ return;
 }
 
 const result = dataExcel.find(row =>
-row.PLU == input || row.BARCODE == input
+
+row.PLU == input ||
+row.BARCODE == input
+
 );
 
 if(result){
@@ -647,18 +848,29 @@ createBox("LPP 03",result.LPP_03_DCI);
 
 }else{
 
-resultDiv.innerHTML=`
+resultDiv.innerHTML = `
+
 <div class="data-box">
-<div class="data-label">HASIL</div>
+
+<div class="data-label">
+HASIL
+</div>
+
 <div class="data-value">
 ❌ Data tidak ditemukan
 </div>
+
 </div>
+
 `;
 
 }
 
 }
+
+/* =========================
+   FORMAT TANGGAL
+========================= */
 
 function formatTanggal(nilai){
 
@@ -670,7 +882,10 @@ const excelEpoch =
 new Date(Date.UTC(1899,11,30));
 
 const result =
-new Date(excelEpoch.getTime() + nilai * 86400000);
+new Date(
+excelEpoch.getTime() +
+nilai * 86400000
+);
 
 return formatDateObj(result);
 
@@ -698,6 +913,10 @@ return date
 
 }
 
+/* =========================
+   SCANNER
+========================= */
+
 function startScanner(){
 
 const html5QrCode =
@@ -705,7 +924,7 @@ new Html5Qrcode("reader");
 
 const config = {
 fps:10,
-qrbox:250
+qrbox:220
 };
 
 html5QrCode.start(
@@ -721,7 +940,7 @@ decodedText;
 
 html5QrCode.stop();
 
-document.getElementById("reader").innerHTML="";
+document.getElementById("reader").innerHTML = "";
 
 searchPLU(decodedText);
 
@@ -731,13 +950,18 @@ searchPLU(decodedText);
 
 ).catch(err => {
 
-document.getElementById("result").innerHTML=`
+document.getElementById("result").innerHTML = `
 
 <div class="data-box">
-<div class="data-label">ERROR</div>
+
+<div class="data-label">
+ERROR
+</div>
+
 <div class="data-value">
 ${err}
 </div>
+
 </div>
 
 `;
