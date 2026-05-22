@@ -8,6 +8,387 @@
   <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
   <script src="https://unpkg.com/html5-qrcode"></script>
 
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+  *{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+  }
+
+  body{
+    font-family:'Poppins',sans-serif;
+    min-height:100vh;
+    overflow-x:hidden;
+    background:
+      radial-gradient(circle at top left,#14532d 0%,transparent 30%),
+      radial-gradient(circle at bottom right,#0f766e 0%,transparent 30%),
+      linear-gradient(135deg,#020617,#0f172a,#111827);
+    color:white;
+    padding:20px;
+  }
+
+  /* Background Glow */
+  .bg-glow{
+    position:fixed;
+    width:400px;
+    height:400px;
+    background:#22c55e;
+    filter:blur(120px);
+    opacity:0.15;
+    border-radius:50%;
+    top:-100px;
+    left:-100px;
+    z-index:-1;
+  }
+
+  .bg-glow2{
+    position:fixed;
+    width:350px;
+    height:350px;
+    background:#06b6d4;
+    filter:blur(120px);
+    opacity:0.15;
+    border-radius:50%;
+    bottom:-100px;
+    right:-100px;
+    z-index:-1;
+  }
+
+  .container{
+    max-width:900px;
+    margin:auto;
+  }
+
+  /* Welcome Card */
+  .welcome-box{
+    background:rgba(255,255,255,0.08);
+    border:1px solid rgba(255,255,255,0.1);
+    backdrop-filter:blur(15px);
+    border-radius:25px;
+    padding:40px 30px;
+    text-align:center;
+    box-shadow:0 10px 40px rgba(0,0,0,0.5);
+    margin-top:40px;
+    animation:fadeIn 1s ease;
+  }
+
+  .welcome-box h1{
+    font-size:42px;
+    margin-bottom:15px;
+    background:linear-gradient(to right,#22c55e,#06b6d4);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    font-weight:700;
+  }
+
+  .welcome-box p{
+    color:#cbd5e1;
+    font-size:16px;
+    line-height:1.7;
+    margin-bottom:30px;
+  }
+
+  .start-btn{
+    background:linear-gradient(135deg,#22c55e,#06b6d4);
+    color:white;
+    border:none;
+    padding:14px 35px;
+    font-size:17px;
+    border-radius:50px;
+    cursor:pointer;
+    font-weight:600;
+    transition:0.3s;
+    box-shadow:0 5px 20px rgba(34,197,94,0.4);
+  }
+
+  .start-btn:hover{
+    transform:translateY(-3px) scale(1.03);
+    box-shadow:0 10px 25px rgba(34,197,94,0.5);
+  }
+
+  /* Search Area */
+  #searchContainer{
+    display:none;
+    margin-top:35px;
+    animation:slideUp 0.5s ease;
+  }
+
+  .search-card{
+    background:rgba(255,255,255,0.08);
+    border:1px solid rgba(255,255,255,0.1);
+    backdrop-filter:blur(15px);
+    border-radius:25px;
+    padding:30px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.4);
+  }
+
+  .search-title{
+    text-align:center;
+    margin-bottom:25px;
+    font-size:28px;
+    color:#f8fafc;
+  }
+
+  #searchSection{
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+  }
+
+  input{
+    padding:15px;
+    border:none;
+    border-radius:14px;
+    font-size:16px;
+    outline:none;
+    background:rgba(255,255,255,0.12);
+    color:white;
+    border:1px solid rgba(255,255,255,0.1);
+    transition:0.3s;
+  }
+
+  input:focus{
+    border:1px solid #22c55e;
+    box-shadow:0 0 15px rgba(34,197,94,0.4);
+  }
+
+  input::placeholder{
+    color:#cbd5e1;
+  }
+
+  .btn{
+    padding:15px;
+    border:none;
+    border-radius:14px;
+    font-size:16px;
+    font-weight:600;
+    cursor:pointer;
+    transition:0.3s;
+  }
+
+  .search-btn{
+    background:linear-gradient(135deg,#16a34a,#06b6d4);
+    color:white;
+  }
+
+  .search-btn:hover{
+    transform:translateY(-2px);
+    opacity:0.95;
+  }
+
+  .scan-btn{
+    background:linear-gradient(135deg,#7c3aed,#ec4899);
+    color:white;
+  }
+
+  .scan-btn:hover{
+    transform:translateY(-2px);
+    opacity:0.95;
+  }
+
+  /* QR Reader */
+  #reader{
+    margin-top:25px;
+    border-radius:20px;
+    overflow:hidden;
+    border:2px solid rgba(255,255,255,0.1);
+    background:#0f172a;
+    padding:10px;
+  }
+
+  /* Result */
+  #result{
+    margin-top:30px;
+    background:rgba(255,255,255,0.08);
+    border:1px solid rgba(255,255,255,0.1);
+    backdrop-filter:blur(15px);
+    border-radius:25px;
+    padding:25px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.4);
+  }
+
+  .result-title{
+    text-align:center;
+    font-size:24px;
+    margin-bottom:20px;
+    color:#22c55e;
+  }
+
+  .data-item{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:14px 0;
+    border-bottom:1px solid rgba(255,255,255,0.1);
+  }
+
+  .data-item:last-child{
+    border-bottom:none;
+  }
+
+  .label{
+    font-weight:600;
+    color:#38bdf8;
+  }
+
+  .value{
+    color:#f8fafc;
+    text-align:right;
+    max-width:60%;
+    word-break:break-word;
+  }
+
+  @keyframes fadeIn{
+    from{
+      opacity:0;
+      transform:translateY(30px);
+    }
+    to{
+      opacity:1;
+      transform:translateY(0);
+    }
+  }
+
+  @keyframes slideUp{
+    from{
+      opacity:0;
+      transform:translateY(40px);
+    }
+    to{
+      opacity:1;
+      transform:translateY(0);
+    }
+  }
+
+  @media(max-width:600px){
+
+    .welcome-box h1{
+      font-size:30px;
+    }
+
+    .search-title{
+      font-size:22px;
+    }
+
+    .data-item{
+      flex-direction:column;
+      align-items:flex-start;
+      gap:5px;
+    }
+
+    .value{
+      max-width:100%;
+      text-align:left;
+    }
+  }
+</style>
+
+<div class="bg-glow"></div>
+<div class="bg-glow2"></div>
+
+<div class="container">
+
+  <!-- WELCOME -->
+  <div class="welcome-box">
+    <h1>Selamat Datang</h1>
+
+    <p>
+      Sistem pengecekan data barang modern dengan fitur 
+      pencarian barcode dan scanner otomatis.
+      <br>
+      Silakan tekan tombol di bawah untuk mulai mencari data barang.
+    </p>
+
+    <button class="start-btn" onclick="showSearchMenu()">
+      🚀 Mulai Cek Barang
+    </button>
+  </div>
+
+  <!-- SEARCH AREA -->
+  <div id="searchContainer">
+    
+    <div class="search-card">
+
+      <h2 class="search-title">📦 Input Barcode Barang</h2>
+
+      <div id="searchSection">
+
+        <input 
+          type="text" 
+          id="barcodeInput"
+          placeholder="Masukkan Barcode / PLU..."
+        >
+
+        <button class="btn search-btn" onclick="searchData()">
+          🔍 Cari Data
+        </button>
+
+        <button class="btn scan-btn" onclick="startScanner()">
+          📷 Scan Barcode
+        </button>
+
+      </div>
+
+      <div id="reader"></div>
+
+    </div>
+
+    <!-- RESULT -->
+    <div id="result">
+
+      <div class="result-title">
+        Hasil Data Barang
+      </div>
+
+      <div class="data-item">
+        <span class="label">Barcode</span>
+        <span class="value">-</span>
+      </div>
+
+      <div class="data-item">
+        <span class="label">Description</span>
+        <span class="value">-</span>
+      </div>
+
+      <div class="data-item">
+        <span class="label">Supplier</span>
+        <span class="value">-</span>
+      </div>
+
+      <div class="data-item">
+        <span class="label">Supco</span>
+        <span class="value">-</span>
+      </div>
+
+      <div class="data-item">
+        <span class="label">Ptag</span>
+        <span class="value">-</span>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+  function showSearchMenu() {
+
+    const menu = document.getElementById("searchContainer");
+
+    if(menu.style.display === "block"){
+      menu.style.display = "none";
+    } else {
+      menu.style.display = "block";
+      menu.scrollIntoView({
+        behavior: "smooth"
+      });
+    }
+
+  }
+</script>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@500&display=swap');
 
@@ -131,7 +512,339 @@
 
   <div id="result">Masukkan kode atau scan barcode untuk mengecek detail barang.</div>
 
-  <script>
+  <script> ubah tampilan nya jadi lebih elegan dan keren dan tambahkan ruang selamat datang dan tambahkan tombol ketika di klik baru muncul menu input barcode nya
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+  *{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+  }
+
+  body{
+    font-family:'Poppins',sans-serif;
+    min-height:100vh;
+    overflow-x:hidden;
+    background:
+      radial-gradient(circle at top left,#16a34a 0%,transparent 25%),
+      radial-gradient(circle at bottom right,#0891b2 0%,transparent 25%),
+      linear-gradient(135deg,#020617,#0f172a,#111827);
+    color:white;
+    padding:20px;
+  }
+
+  /* Glow Background */
+  .glow1{
+    position:fixed;
+    width:350px;
+    height:350px;
+    background:#22c55e;
+    filter:blur(120px);
+    opacity:0.15;
+    border-radius:50%;
+    top:-100px;
+    left:-100px;
+    z-index:-1;
+  }
+
+  .glow2{
+    position:fixed;
+    width:350px;
+    height:350px;
+    background:#06b6d4;
+    filter:blur(120px);
+    opacity:0.15;
+    border-radius:50%;
+    bottom:-100px;
+    right:-100px;
+    z-index:-1;
+  }
+
+  .container{
+    max-width:900px;
+    margin:auto;
+  }
+
+  /* Welcome Box */
+  .welcome-box{
+    margin-top:40px;
+    background:rgba(255,255,255,0.08);
+    border:1px solid rgba(255,255,255,0.1);
+    backdrop-filter:blur(15px);
+    border-radius:28px;
+    padding:50px 35px;
+    text-align:center;
+    box-shadow:0 10px 40px rgba(0,0,0,0.5);
+    animation:fadeIn 1s ease;
+  }
+
+  .welcome-box h1{
+    font-size:48px;
+    margin-bottom:15px;
+    background:linear-gradient(to right,#22c55e,#38bdf8);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    font-weight:700;
+  }
+
+  .welcome-box p{
+    color:#cbd5e1;
+    font-size:17px;
+    line-height:1.8;
+    margin-bottom:35px;
+  }
+
+  .open-btn{
+    padding:15px 40px;
+    border:none;
+    border-radius:50px;
+    background:linear-gradient(135deg,#22c55e,#06b6d4);
+    color:white;
+    font-size:17px;
+    font-weight:600;
+    cursor:pointer;
+    transition:0.3s;
+    box-shadow:0 5px 25px rgba(34,197,94,0.4);
+  }
+
+  .open-btn:hover{
+    transform:translateY(-3px) scale(1.03);
+    box-shadow:0 10px 30px rgba(34,197,94,0.5);
+  }
+
+  /* Search Section */
+  #searchWrapper{
+    display:none;
+    margin-top:35px;
+    animation:slideUp 0.5s ease;
+  }
+
+  .search-card{
+    background:rgba(255,255,255,0.08);
+    border:1px solid rgba(255,255,255,0.1);
+    backdrop-filter:blur(15px);
+    border-radius:28px;
+    padding:30px;
+    box-shadow:0 10px 35px rgba(0,0,0,0.4);
+  }
+
+  .search-title{
+    text-align:center;
+    margin-bottom:25px;
+    font-size:28px;
+    color:#f8fafc;
+  }
+
+  #searchSection{
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+    max-width:550px;
+    margin:auto;
+  }
+
+  input{
+    padding:16px;
+    border-radius:16px;
+    border:1px solid rgba(255,255,255,0.1);
+    background:rgba(255,255,255,0.08);
+    color:white;
+    font-size:16px;
+    outline:none;
+    transition:0.3s;
+  }
+
+  input:focus{
+    border:1px solid #22c55e;
+    box-shadow:0 0 15px rgba(34,197,94,0.4);
+  }
+
+  input::placeholder{
+    color:#cbd5e1;
+  }
+
+  button{
+    padding:15px;
+    border:none;
+    border-radius:16px;
+    font-size:16px;
+    font-weight:600;
+    cursor:pointer;
+    transition:0.3s;
+  }
+
+  .search-btn{
+    background:linear-gradient(135deg,#16a34a,#0ea5e9);
+    color:white;
+  }
+
+  .scan-btn{
+    background:linear-gradient(135deg,#7c3aed,#ec4899);
+    color:white;
+  }
+
+  .search-btn:hover,
+  .scan-btn:hover{
+    transform:translateY(-2px);
+    opacity:0.95;
+  }
+
+  /* Reader */
+  #reader{
+    margin:25px auto 0;
+    max-width:550px;
+    border-radius:20px;
+    overflow:hidden;
+    border:2px solid rgba(255,255,255,0.1);
+    background:#0f172a;
+    padding:10px;
+  }
+
+  /* Result */
+  #result{
+    max-width:650px;
+    margin:30px auto 0;
+    background:rgba(255,255,255,0.08);
+    border:1px solid rgba(255,255,255,0.1);
+    backdrop-filter:blur(15px);
+    border-radius:24px;
+    padding:25px;
+    box-shadow:0 10px 35px rgba(0,0,0,0.4);
+    color:#f8fafc;
+    font-size:16px;
+    line-height:1.8;
+  }
+
+  /* Animation */
+  @keyframes fadeIn{
+    from{
+      opacity:0;
+      transform:translateY(30px);
+    }
+    to{
+      opacity:1;
+      transform:translateY(0);
+    }
+  }
+
+  @keyframes slideUp{
+    from{
+      opacity:0;
+      transform:translateY(40px);
+    }
+    to{
+      opacity:1;
+      transform:translateY(0);
+    }
+  }
+
+  /* Mobile */
+  @media(max-width:600px){
+
+    .welcome-box{
+      padding:35px 20px;
+    }
+
+    .welcome-box h1{
+      font-size:34px;
+    }
+
+    .welcome-box p{
+      font-size:15px;
+    }
+
+    .search-title{
+      font-size:22px;
+    }
+  }
+</style>
+
+</head>
+
+<body>
+
+<div class="glow1"></div>
+<div class="glow2"></div>
+
+<div class="container">
+
+  <!-- WELCOME -->
+  <div class="welcome-box">
+
+    <h1>📦 Cek Data Barang</h1>
+
+    <p>
+      Selamat datang di sistem pengecekan data barang modern.
+      <br>
+      Cari informasi produk dengan cepat menggunakan
+      PLU atau scan barcode otomatis.
+    </p>
+
+    <button class="open-btn" onclick="showSearchMenu()">
+      🚀 Mulai Pencarian
+    </button>
+
+  </div>
+
+  <!-- SEARCH -->
+  <div id="searchWrapper">
+
+    <div class="search-card">
+
+      <h2 class="search-title">
+        🔍 Input Barcode / PLU
+      </h2>
+
+      <div id="searchSection">
+
+        <input 
+          type="text" 
+          id="searchInput" 
+          placeholder="Masukkan PLU atau Barcode"
+        />
+
+        <button class="search-btn" onclick="searchPLU()">
+          Cari Data
+        </button>
+
+        <button class="scan-btn" onclick="startScanner()">
+          📷 Scan Barcode
+        </button>
+
+      </div>
+
+      <div id="reader"></div>
+
+    </div>
+
+    <div id="result">
+      Masukkan kode atau scan barcode untuk mengecek detail barang.
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+
+  function showSearchMenu(){
+
+    const menu = document.getElementById("searchWrapper");
+
+    if(menu.style.display === "block"){
+      menu.style.display = "none";
+    }else{
+      menu.style.display = "block";
+
+      menu.scrollIntoView({
+        behavior:"smooth"
+      });
+    }
+
+  }
+
+</script>
     let dataExcel = [];
 
     const excelURL = "barcode.xlsx"; // pastikan file barcode.xlsx ada di folder yang sama
