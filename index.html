@@ -851,7 +851,7 @@ ONLINE
 type="text"
 id="searchInput"
 class="input-box"
-placeholder="Masukkan Barcode / PLU..."
+placeholder=""
 >
 
 <button class="btn search-btn" onclick="playSound('click'); searchPLU()">
@@ -1017,7 +1017,7 @@ raw:true
 document.getElementById("dbCount").innerText =
 dataExcel.length;
 
-speak("Database berhasil dimuat");
+speak("Aplikasi berhasil dimuat");
 
 })
 
@@ -1069,7 +1069,7 @@ if(!input){
 
 playSound("error");
 
-speak("Silakan masukkan barcode");
+speak("");
 
 resultDiv.innerHTML = `
 
@@ -1080,7 +1080,7 @@ INFO
 </div>
 
 <div class="data-value">
-Silakan masukkan barcode atau PLU
+
 </div>
 
 </div>
@@ -1271,7 +1271,7 @@ recognition.lang = "id-ID";
 
 recognition.start();
 
-speak("Silakan ucapkan barcode");
+speak("");
 
 recognition.onresult = function(event){
 
