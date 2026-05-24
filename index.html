@@ -28,6 +28,10 @@ padding:0;
 box-sizing:border-box;
 }
 
+/* =========================
+   BODY
+========================= */
+
 body{
 
 font-family:'Poppins',sans-serif;
@@ -51,8 +55,11 @@ color:white;
 .bg1,.bg2,.bg3{
 
 position:fixed;
+
 border-radius:50%;
+
 filter:blur(130px);
+
 z-index:-1;
 
 animation:float 10s ease-in-out infinite;
@@ -109,10 +116,15 @@ transform:translateY(0px);
 ========================= */
 
 .page{
+
 min-height:100vh;
+
 display:flex;
+
 align-items:center;
+
 justify-content:center;
+
 padding:20px;
 }
 
@@ -121,7 +133,9 @@ padding:20px;
 ========================= */
 
 .container{
+
 width:100%;
+
 max-width:1100px;
 }
 
@@ -150,7 +164,6 @@ transform:translateY(-3px);
 box-shadow:
 0 15px 40px rgba(34,197,94,.08),
 0 10px 25px rgba(6,182,212,.08);
-
 }
 
 /* =========================
@@ -211,6 +224,7 @@ transform:scale(1);
 .welcome-title{
 
 font-size:46px;
+
 font-weight:800;
 
 line-height:1.1;
@@ -248,6 +262,7 @@ padding:15px 35px;
 border-radius:50px;
 
 font-size:15px;
+
 font-weight:700;
 
 cursor:pointer;
@@ -282,7 +297,9 @@ display:none;
 .topbar{
 
 display:flex;
+
 justify-content:space-between;
+
 align-items:center;
 
 padding:20px 24px;
@@ -295,7 +312,9 @@ margin-bottom:20px;
 .brand{
 
 display:flex;
+
 align-items:center;
+
 gap:14px;
 }
 
@@ -319,12 +338,14 @@ linear-gradient(135deg,#22c55e,#06b6d4);
 .brand h2{
 
 font-size:24px;
+
 font-weight:700;
 }
 
 .brand p{
 
 font-size:12px;
+
 color:#cbd5e1;
 }
 
@@ -335,6 +356,7 @@ color:#cbd5e1;
 .stats{
 
 display:flex;
+
 gap:14px;
 
 margin-bottom:20px;
@@ -356,6 +378,7 @@ border-radius:20px;
 .stat-label{
 
 font-size:12px;
+
 color:#94a3b8;
 
 margin-bottom:8px;
@@ -364,6 +387,7 @@ margin-bottom:8px;
 .stat-value{
 
 font-size:28px;
+
 font-weight:700;
 }
 
@@ -391,6 +415,7 @@ border-radius:24px;
 .section-title{
 
 font-size:22px;
+
 font-weight:700;
 
 margin-bottom:20px;
@@ -407,6 +432,7 @@ width:100%;
 padding:15px 16px;
 
 border:none;
+
 outline:none;
 
 border-radius:16px;
@@ -433,6 +459,7 @@ box-shadow:
 }
 
 .input-box::placeholder{
+
 color:#94a3b8;
 }
 
@@ -451,6 +478,7 @@ padding:15px;
 border-radius:16px;
 
 font-size:14px;
+
 font-weight:700;
 
 color:white;
@@ -488,6 +516,113 @@ linear-gradient(135deg,#f59e0b,#ef4444);
 }
 
 /* =========================
+   AI LOADING
+========================= */
+
+.ai-loading{
+
+display:flex;
+
+align-items:center;
+
+gap:8px;
+
+margin-top:15px;
+
+color:#38bdf8;
+
+font-size:13px;
+}
+
+.dot{
+
+width:8px;
+height:8px;
+
+border-radius:50%;
+
+background:#38bdf8;
+
+animation:bounce 1s infinite;
+}
+
+.dot:nth-child(2){
+animation-delay:.2s;
+}
+
+.dot:nth-child(3){
+animation-delay:.4s;
+}
+
+@keyframes bounce{
+
+0%,80%,100%{
+transform:scale(0);
+}
+
+40%{
+transform:scale(1);
+}
+
+}
+
+/* =========================
+   VOICE NOTICE
+========================= */
+
+.voice-notice{
+
+margin-top:15px;
+
+padding:14px;
+
+border-radius:16px;
+
+background:
+linear-gradient(
+135deg,
+rgba(139,92,246,.15),
+rgba(236,72,153,.15)
+);
+
+border:1px solid rgba(255,255,255,.08);
+
+font-size:14px;
+
+font-weight:600;
+
+text-align:center;
+
+color:#ffffff;
+
+display:none;
+
+animation:pulseVoice 1.2s infinite;
+
+box-shadow:
+0 0 20px rgba(168,85,247,.15);
+}
+
+@keyframes pulseVoice{
+
+0%{
+transform:scale(1);
+opacity:.8;
+}
+
+50%{
+transform:scale(1.02);
+opacity:1;
+}
+
+100%{
+transform:scale(1);
+opacity:.8;
+}
+
+}
+
+/* =========================
    SCANNER
 ========================= */
 
@@ -514,12 +649,14 @@ margin-bottom:24px;
 .result-header h2{
 
 font-size:28px;
+
 margin-bottom:5px;
 }
 
 .result-header p{
 
 font-size:14px;
+
 color:#cbd5e1;
 }
 
@@ -554,6 +691,7 @@ animation:fadeUp .4s ease;
 content:'';
 
 position:absolute;
+
 inset:0;
 
 background:
@@ -596,60 +734,12 @@ margin-bottom:6px;
 .data-value{
 
 font-size:14px;
+
 font-weight:600;
 
 line-height:1.6;
 
 word-break:break-word;
-}
-
-/* =========================
-   AI LOADING
-========================= */
-
-.ai-loading{
-
-display:flex;
-align-items:center;
-gap:8px;
-
-margin-top:15px;
-
-color:#38bdf8;
-
-font-size:13px;
-}
-
-.dot{
-
-width:8px;
-height:8px;
-
-border-radius:50%;
-
-background:#38bdf8;
-
-animation:bounce 1s infinite;
-}
-
-.dot:nth-child(2){
-animation-delay:.2s;
-}
-
-.dot:nth-child(3){
-animation-delay:.4s;
-}
-
-@keyframes bounce{
-
-0%,80%,100%{
-transform:scale(0);
-}
-
-40%{
-transform:scale(1);
-}
-
 }
 
 /* =========================
@@ -711,6 +801,7 @@ transform:translateY(0);
 }
 
 </style>
+
 </head>
 
 <body>
@@ -851,7 +942,7 @@ ONLINE
 type="text"
 id="searchInput"
 class="input-box"
-placeholder=""
+placeholder="Masukkan Barcode / PLU..."
 >
 
 <button class="btn search-btn" onclick="playSound('click'); searchPLU()">
@@ -873,6 +964,14 @@ Cari Data
 <div class="dot"></div>
 
 AI READY
+
+</div>
+
+<!-- NOTICE VOICE -->
+
+<div id="voiceNotice" class="voice-notice">
+
+🎤 AI sedang bersiap...
 
 </div>
 
@@ -958,7 +1057,10 @@ sounds[type].play();
 
 function speak(text){
 
-const speech = new SpeechSynthesisUtterance(text);
+window.speechSynthesis.cancel();
+
+const speech =
+new SpeechSynthesisUtterance(text);
 
 speech.lang = "id-ID";
 
@@ -1069,7 +1171,7 @@ if(!input){
 
 playSound("error");
 
-speak("");
+speak("Silakan masukkan barcode atau PLU");
 
 resultDiv.innerHTML = `
 
@@ -1080,7 +1182,7 @@ INFO
 </div>
 
 <div class="data-value">
-
+Silakan masukkan barcode atau PLU
 </div>
 
 </div>
@@ -1251,7 +1353,7 @@ speak("Scanner gagal dibuka");
 }
 
 /* =========================
-   VOICE SEARCH
+   VOICE SEARCH AI
 ========================= */
 
 function startVoiceInput(){
@@ -1264,26 +1366,146 @@ return;
 
 }
 
+playSound("click");
+
+const notice =
+document.getElementById("voiceNotice");
+
+/* =========================
+   PERSIAPAN
+========================= */
+
+notice.style.display = "block";
+
+notice.innerHTML =
+"🤖 AI sedang bersiap mendengarkan...";
+
+speak("Silakan sebutkan barcode atau PLU setelah bunyi beep");
+
+/* =========================
+   DELAY 4 DETIK
+========================= */
+
+setTimeout(()=>{
+
+playSound("scan");
+
+/* =========================
+   MULAI DENGAR
+========================= */
+
+notice.innerHTML =
+"🎤 AI sedang mendengarkan... Silakan bicara";
+
 const recognition =
 new webkitSpeechRecognition();
 
 recognition.lang = "id-ID";
 
+recognition.continuous = false;
+
+recognition.interimResults = false;
+
 recognition.start();
 
-speak("");
+/* =========================
+   HASIL VOICE
+========================= */
 
 recognition.onresult = function(event){
 
-const text =
-event.results[0][0].transcript;
+let text =
+event.results[0][0].transcript
+.toLowerCase();
+
+notice.innerHTML =
+"🧠 AI memproses suara...";
+
+/* =========================
+   KONVERSI ANGKA
+========================= */
+
+const angkaMap = {
+
+"nol":"0",
+"satu":"1",
+"dua":"2",
+"tiga":"3",
+"empat":"4",
+"lima":"5",
+"enam":"6",
+"tujuh":"7",
+"delapan":"8",
+"sembilan":"9"
+
+};
+
+/* =========================
+   UBAH KATA JADI ANGKA
+========================= */
+
+Object.keys(angkaMap).forEach(kata=>{
+
+const regex =
+new RegExp("\\b"+kata+"\\b","g");
+
+text = text.replace(regex,angkaMap[kata]);
+
+});
+
+/* =========================
+   HAPUS SPASI
+========================= */
+
+text = text.replace(/\s+/g,'');
+
+/* =========================
+   INPUT OTOMATIS
+========================= */
 
 document.getElementById("searchInput").value =
 text;
 
+playSound("success");
+
+speak("Mencari data");
+
 searchPLU(text);
 
+/* =========================
+   SELESAI
+========================= */
+
+setTimeout(()=>{
+
+notice.style.display = "none";
+
+},2500);
+
 };
+
+/* =========================
+   ERROR
+========================= */
+
+recognition.onerror = function(){
+
+playSound("error");
+
+notice.innerHTML =
+"❌ Voice scanner gagal";
+
+speak("Voice scanner gagal");
+
+setTimeout(()=>{
+
+notice.style.display = "none";
+
+},2500);
+
+};
+
+},4000);
 
 }
 
