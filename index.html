@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Smart Barcode System</title>
+<title>SMART AI BARCODE SYSTEM</title>
 
 <link rel="icon" href="https://upload.wikimedia.org/wikipedia/en/thumb/7/70/Kimetsu_no_Yaiba_logo.svg/320px-Kimetsu_no_Yaiba_logo.svg.png">
 
@@ -12,6 +13,7 @@
 <script src="https://unpkg.com/html5-qrcode"></script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
+
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
@@ -21,77 +23,85 @@
 ========================= */
 
 *{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
+margin:0;
+padding:0;
+box-sizing:border-box;
 }
-
-/* =========================
-   BODY
-========================= */
 
 body{
-  font-family:'Poppins',sans-serif;
-  min-height:100vh;
-  overflow-x:hidden;
 
-  background:
-  radial-gradient(circle at top left,#34d39922 0%,transparent 28%),
-  radial-gradient(circle at bottom right,#38bdf822 0%,transparent 28%),
-  linear-gradient(135deg,#020617,#0b1120,#111827);
+font-family:'Poppins',sans-serif;
 
-  color:white;
+min-height:100vh;
+
+overflow-x:hidden;
+
+background:
+radial-gradient(circle at top left,#22c55e22 0%,transparent 25%),
+radial-gradient(circle at bottom right,#06b6d422 0%,transparent 25%),
+linear-gradient(135deg,#020617,#07111f,#0f172a);
+
+color:white;
 }
 
 /* =========================
-   BACKGROUND GLOW
+   BACKGROUND
 ========================= */
 
-.bg1,
-.bg2,
-.bg3{
-  position:fixed;
-  border-radius:50%;
-  filter:blur(130px);
-  z-index:-1;
+.bg1,.bg2,.bg3{
+
+position:fixed;
+border-radius:50%;
+filter:blur(130px);
+z-index:-1;
+
+animation:float 10s ease-in-out infinite;
+
 }
 
 .bg1{
-  width:320px;
-  height:320px;
-  background:#22c55e;
-  opacity:0.12;
-  top:-100px;
-  left:-100px;
+width:320px;
+height:320px;
+background:#22c55e;
+top:-100px;
+left:-100px;
+opacity:.15;
 }
 
 .bg2{
-  width:320px;
-  height:320px;
-  background:#0ea5e9;
-  opacity:0.12;
-  bottom:-100px;
-  right:-100px;
+width:320px;
+height:320px;
+background:#06b6d4;
+bottom:-100px;
+right:-100px;
+opacity:.15;
+animation-delay:2s;
 }
 
 .bg3{
-  width:250px;
-  height:250px;
-  background:#9333ea;
-  opacity:0.08;
-  top:45%;
-  left:45%;
+width:240px;
+height:240px;
+background:#9333ea;
+top:40%;
+left:40%;
+opacity:.08;
+animation-delay:4s;
 }
 
-/* =========================
-   CONTAINER
-========================= */
+@keyframes float{
 
-.container{
-  width:100%;
-  max-width:1020px;
-  margin:auto;
-  padding:18px;
+0%{
+transform:translateY(0px);
+}
+
+50%{
+transform:translateY(20px);
+}
+
+100%{
+transform:translateY(0px);
+}
+
 }
 
 /* =========================
@@ -99,10 +109,20 @@ body{
 ========================= */
 
 .page{
-  min-height:100vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
+min-height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
+padding:20px;
+}
+
+/* =========================
+   CONTAINER
+========================= */
+
+.container{
+width:100%;
+max-width:1100px;
 }
 
 /* =========================
@@ -110,171 +130,241 @@ body{
 ========================= */
 
 .glass{
-  background:rgba(255,255,255,0.06);
 
-  border:1px solid rgba(255,255,255,0.08);
+background:rgba(255,255,255,0.06);
 
-  backdrop-filter:blur(18px);
+border:1px solid rgba(255,255,255,0.08);
 
-  box-shadow:
-  0 8px 30px rgba(0,0,0,0.35);
+backdrop-filter:blur(18px);
+
+box-shadow:
+0 10px 40px rgba(0,0,0,0.35);
+
+transition:.35s;
+}
+
+.glass:hover{
+
+transform:translateY(-3px);
+
+box-shadow:
+0 15px 40px rgba(34,197,94,.08),
+0 10px 25px rgba(6,182,212,.08);
+
 }
 
 /* =========================
-   WELCOME PAGE
+   WELCOME
 ========================= */
 
 .welcome-box{
-  width:100%;
-  max-width:760px;
 
-  border-radius:28px;
+padding:50px 35px;
 
-  padding:45px 35px;
+border-radius:30px;
 
-  text-align:center;
+text-align:center;
 
-  animation:fadeUp .8s ease;
+animation:fadeUp .8s ease;
 }
 
 .logo-circle{
-  width:85px;
-  height:85px;
 
-  margin:auto auto 22px;
+width:95px;
+height:95px;
 
-  border-radius:24px;
+border-radius:28px;
 
-  background:
-  linear-gradient(135deg,#22c55e,#06b6d4);
+margin:auto auto 24px;
 
-  display:flex;
-  align-items:center;
-  justify-content:center;
+display:flex;
+align-items:center;
+justify-content:center;
 
-  font-size:36px;
+font-size:40px;
 
-  box-shadow:
-  0 10px 30px rgba(34,197,94,0.25);
+background:
+linear-gradient(135deg,#22c55e,#06b6d4);
+
+box-shadow:
+0 10px 35px rgba(34,197,94,.3);
+
+animation:pulse 2s infinite;
+}
+
+@keyframes pulse{
+
+0%{
+transform:scale(1);
+}
+
+50%{
+transform:scale(1.06);
+}
+
+100%{
+transform:scale(1);
+}
+
 }
 
 .welcome-title{
-  font-size:42px;
-  font-weight:700;
-  line-height:1.15;
 
-  margin-bottom:16px;
+font-size:46px;
+font-weight:800;
 
-  background:
-  linear-gradient(to right,#22c55e,#38bdf8,#ffffff);
+line-height:1.1;
 
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
+margin-bottom:18px;
+
+background:
+linear-gradient(to right,#22c55e,#38bdf8,#ffffff);
+
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
 }
 
 .welcome-sub{
-  max-width:620px;
 
-  margin:auto;
+max-width:650px;
 
-  color:#cbd5e1;
+margin:auto;
 
-  line-height:1.8;
+line-height:1.9;
 
-  font-size:15px;
+color:#cbd5e1;
 
-  margin-bottom:28px;
+font-size:15px;
+
+margin-bottom:30px;
 }
 
 .enter-btn{
-  border:none;
 
-  padding:14px 34px;
+border:none;
 
-  border-radius:50px;
+padding:15px 35px;
 
-  font-size:15px;
-  font-weight:600;
+border-radius:50px;
 
-  cursor:pointer;
+font-size:15px;
+font-weight:700;
 
-  color:white;
+cursor:pointer;
 
-  background:
-  linear-gradient(135deg,#22c55e,#06b6d4);
+color:white;
 
-  transition:.3s;
+background:
+linear-gradient(135deg,#22c55e,#06b6d4);
 
-  box-shadow:
-  0 8px 25px rgba(34,197,94,0.25);
+transition:.3s;
+
+box-shadow:
+0 10px 30px rgba(34,197,94,.25);
 }
 
 .enter-btn:hover{
-  transform:translateY(-3px);
 
-  box-shadow:
-  0 15px 30px rgba(34,197,94,0.3);
+transform:translateY(-3px);
+
+box-shadow:
+0 18px 35px rgba(34,197,94,.35);
 }
 
 /* =========================
-   APP PAGE
+   APP
 ========================= */
 
 #appPage{
-  display:none;
+display:none;
 }
-
-.app-wrapper{
-  width:100%;
-  animation:fadeUp .6s ease;
-}
-
-/* =========================
-   TOPBAR
-========================= */
 
 .topbar{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
 
-  padding:18px 24px;
+display:flex;
+justify-content:space-between;
+align-items:center;
 
-  border-radius:22px;
+padding:20px 24px;
 
-  margin-bottom:20px;
+border-radius:24px;
+
+margin-bottom:20px;
 }
 
 .brand{
-  display:flex;
-  align-items:center;
-  gap:14px;
+
+display:flex;
+align-items:center;
+gap:14px;
 }
 
 .brand-icon{
-  width:52px;
-  height:52px;
 
-  border-radius:16px;
+width:55px;
+height:55px;
 
-  background:
-  linear-gradient(135deg,#22c55e,#06b6d4);
+border-radius:18px;
 
-  display:flex;
-  align-items:center;
-  justify-content:center;
+display:flex;
+align-items:center;
+justify-content:center;
 
-  font-size:22px;
+font-size:24px;
+
+background:
+linear-gradient(135deg,#22c55e,#06b6d4);
 }
 
 .brand h2{
-  font-size:22px;
-  font-weight:700;
+
+font-size:24px;
+font-weight:700;
 }
 
 .brand p{
-  color:#cbd5e1;
-  font-size:12px;
+
+font-size:12px;
+color:#cbd5e1;
+}
+
+/* =========================
+   STATS
+========================= */
+
+.stats{
+
+display:flex;
+gap:14px;
+
+margin-bottom:20px;
+
+flex-wrap:wrap;
+}
+
+.stat-box{
+
+flex:1;
+
+min-width:180px;
+
+padding:18px;
+
+border-radius:20px;
+}
+
+.stat-label{
+
+font-size:12px;
+color:#94a3b8;
+
+margin-bottom:8px;
+}
+
+.stat-value{
+
+font-size:28px;
+font-weight:700;
 }
 
 /* =========================
@@ -282,30 +372,28 @@ body{
 ========================= */
 
 .main-grid{
-  display:grid;
-  grid-template-columns:320px 1fr;
-  gap:20px;
-}
 
-/* =========================
-   CARD
-========================= */
+display:grid;
+
+grid-template-columns:320px 1fr;
+
+gap:20px;
+}
 
 .search-card,
 .result-card{
-  border-radius:24px;
-  padding:24px;
+
+padding:24px;
+
+border-radius:24px;
 }
 
-/* =========================
-   TITLE
-========================= */
-
 .section-title{
-  font-size:22px;
-  font-weight:700;
 
-  margin-bottom:20px;
+font-size:22px;
+font-weight:700;
+
+margin-bottom:20px;
 }
 
 /* =========================
@@ -313,37 +401,39 @@ body{
 ========================= */
 
 .input-box{
-  width:100%;
 
-  padding:14px 16px;
+width:100%;
 
-  border:none;
-  outline:none;
+padding:15px 16px;
 
-  border-radius:16px;
+border:none;
+outline:none;
 
-  background:rgba(255,255,255,0.06);
+border-radius:16px;
 
-  color:white;
+background:rgba(255,255,255,.06);
 
-  font-size:14px;
+color:white;
 
-  margin-bottom:14px;
+font-size:14px;
 
-  border:1px solid rgba(255,255,255,0.06);
+margin-bottom:14px;
 
-  transition:.3s;
+border:1px solid rgba(255,255,255,.06);
+
+transition:.3s;
 }
 
 .input-box:focus{
-  border:1px solid #22c55e;
 
-  box-shadow:
-  0 0 15px rgba(34,197,94,0.18);
+border:1px solid #22c55e;
+
+box-shadow:
+0 0 20px rgba(34,197,94,.2);
 }
 
 .input-box::placeholder{
-  color:#94a3b8;
+color:#94a3b8;
 }
 
 /* =========================
@@ -351,38 +441,50 @@ body{
 ========================= */
 
 .btn{
-  width:100%;
 
-  border:none;
+width:100%;
 
-  padding:14px;
+border:none;
 
-  border-radius:16px;
+padding:15px;
 
-  font-size:14px;
-  font-weight:600;
+border-radius:16px;
 
-  color:white;
+font-size:14px;
+font-weight:700;
 
-  cursor:pointer;
+color:white;
 
-  transition:.3s;
+cursor:pointer;
+
+transition:.3s;
 }
 
 .btn:hover{
-  transform:translateY(-2px);
+
+transform:translateY(-2px);
 }
 
 .search-btn{
-  background:
-  linear-gradient(135deg,#22c55e,#06b6d4);
 
-  margin-bottom:12px;
+background:
+linear-gradient(135deg,#22c55e,#06b6d4);
+
+margin-bottom:12px;
 }
 
 .scan-btn{
-  background:
-  linear-gradient(135deg,#8b5cf6,#ec4899);
+
+background:
+linear-gradient(135deg,#8b5cf6,#ec4899);
+
+margin-bottom:12px;
+}
+
+.voice-btn{
+
+background:
+linear-gradient(135deg,#f59e0b,#ef4444);
 }
 
 /* =========================
@@ -390,13 +492,14 @@ body{
 ========================= */
 
 #reader{
-  margin-top:20px;
 
-  overflow:hidden;
+margin-top:20px;
 
-  border-radius:18px;
+overflow:hidden;
 
-  border:1px solid rgba(255,255,255,0.08);
+border-radius:20px;
+
+border:1px solid rgba(255,255,255,.08);
 }
 
 /* =========================
@@ -404,50 +507,149 @@ body{
 ========================= */
 
 .result-header{
-  margin-bottom:24px;
+
+margin-bottom:24px;
 }
 
 .result-header h2{
-  font-size:26px;
-  margin-bottom:5px;
+
+font-size:28px;
+margin-bottom:5px;
 }
 
 .result-header p{
-  color:#cbd5e1;
-  font-size:14px;
+
+font-size:14px;
+color:#cbd5e1;
 }
 
 .result-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:14px;
+
+display:grid;
+
+grid-template-columns:1fr 1fr;
+
+gap:14px;
 }
 
 .data-box{
-  background:rgba(255,255,255,0.05);
 
-  border:1px solid rgba(255,255,255,0.05);
+position:relative;
 
-  border-radius:18px;
+overflow:hidden;
 
-  padding:16px;
+padding:18px;
+
+border-radius:18px;
+
+background:rgba(255,255,255,.05);
+
+border:1px solid rgba(255,255,255,.05);
+
+animation:fadeUp .4s ease;
+}
+
+.data-box::before{
+
+content:'';
+
+position:absolute;
+inset:0;
+
+background:
+linear-gradient(
+120deg,
+transparent,
+rgba(255,255,255,.08),
+transparent);
+
+transform:translateX(-100%);
+
+animation:shine 4s infinite;
+}
+
+@keyframes shine{
+
+0%{
+transform:translateX(-100%);
+}
+
+40%{
+transform:translateX(120%);
+}
+
+100%{
+transform:translateX(120%);
+}
+
 }
 
 .data-label{
-  color:#38bdf8;
 
-  font-size:12px;
+font-size:12px;
 
-  margin-bottom:6px;
+color:#38bdf8;
+
+margin-bottom:6px;
 }
 
 .data-value{
-  font-size:14px;
-  font-weight:600;
 
-  line-height:1.5;
+font-size:14px;
+font-weight:600;
 
-  word-break:break-word;
+line-height:1.6;
+
+word-break:break-word;
+}
+
+/* =========================
+   AI LOADING
+========================= */
+
+.ai-loading{
+
+display:flex;
+align-items:center;
+gap:8px;
+
+margin-top:15px;
+
+color:#38bdf8;
+
+font-size:13px;
+}
+
+.dot{
+
+width:8px;
+height:8px;
+
+border-radius:50%;
+
+background:#38bdf8;
+
+animation:bounce 1s infinite;
+}
+
+.dot:nth-child(2){
+animation-delay:.2s;
+}
+
+.dot:nth-child(3){
+animation-delay:.4s;
+}
+
+@keyframes bounce{
+
+0%,80%,100%{
+transform:scale(0);
+}
+
+40%{
+transform:scale(1);
+}
+
 }
 
 /* =========================
@@ -456,45 +658,37 @@ body{
 
 @media(max-width:850px){
 
-  .main-grid{
-    grid-template-columns:1fr;
-  }
+.main-grid{
+grid-template-columns:1fr;
+}
 
-  .welcome-title{
-    font-size:34px;
-  }
+.result-grid{
+grid-template-columns:1fr;
+}
 
-  .result-grid{
-    grid-template-columns:1fr;
-  }
+.welcome-title{
+font-size:34px;
+}
 
 }
 
 @media(max-width:500px){
 
-  .welcome-box{
-    padding:35px 24px;
-  }
+.welcome-box{
+padding:38px 24px;
+}
 
-  .welcome-title{
-    font-size:28px;
-  }
+.welcome-title{
+font-size:28px;
+}
 
-  .welcome-sub{
-    font-size:14px;
-  }
+.topbar{
+padding:16px;
+}
 
-  .topbar{
-    padding:16px;
-  }
-
-  .brand h2{
-    font-size:18px;
-  }
-
-  .section-title{
-    font-size:20px;
-  }
+.brand h2{
+font-size:18px;
+}
 
 }
 
@@ -504,15 +698,15 @@ body{
 
 @keyframes fadeUp{
 
-  from{
-    opacity:0;
-    transform:translateY(35px);
-  }
+from{
+opacity:0;
+transform:translateY(30px);
+}
 
-  to{
-    opacity:1;
-    transform:translateY(0);
-  }
+to{
+opacity:1;
+transform:translateY(0);
+}
 
 }
 
@@ -522,6 +716,7 @@ body{
 <body>
 
 <!-- BACKGROUND -->
+
 <div class="bg1"></div>
 <div class="bg2"></div>
 <div class="bg3"></div>
@@ -537,30 +732,29 @@ body{
 <div class="welcome-box glass">
 
 <div class="logo-circle">
-📦
+🤖
 </div>
 
 <h1 class="welcome-title">
-SMART BARCODE<br>
-SYSTEM
+SMART AI<br>
+BARCODE SYSTEM
 </h1>
 
 <p class="welcome-sub">
 
-Selamat datang di sistem pengecekan barang modern.
+Sistem pengecekan barang modern berbasis AI Interface.
 
-Cari data produk lebih cepat menggunakan:
-<br><br>
-
-✔ Barcode Scanner  
-✔ Pencarian PLU  
+✔ Barcode Scanner AI  
+✔ Voice Assistant  
 ✔ Database Excel  
-✔ Tampilan Professional  
+✔ AI Sound Effects  
+✔ Premium Dashboard  
+✔ Neon Cyber UI  
 
 </p>
 
 <button class="enter-btn" onclick="openApp()">
-🚀 Masuk Aplikasi
+🚀 Masuk Sistem AI
 </button>
 
 </div>
@@ -570,14 +764,12 @@ Cari data produk lebih cepat menggunakan:
 </div>
 
 <!-- =========================
-     PAGE 2
+     APP PAGE
 ========================= -->
 
 <div class="page" id="appPage">
 
 <div class="container">
-
-<div class="app-wrapper">
 
 <!-- TOPBAR -->
 
@@ -586,17 +778,57 @@ Cari data produk lebih cepat menggunakan:
 <div class="brand">
 
 <div class="brand-icon">
-📦
+🤖
 </div>
 
 <div>
 
-<h2>Barcode Check</h2>
+<h2>SMART AI BARCODE</h2>
 
-<p>
-Sistem Pengecekan Barang
-</p>
+<p>Sistem Pengecekan Barang Modern</p>
 
+</div>
+
+</div>
+
+</div>
+
+<!-- STATS -->
+
+<div class="stats">
+
+<div class="stat-box glass">
+
+<div class="stat-label">
+TOTAL DATABASE
+</div>
+
+<div class="stat-value" id="dbCount">
+0
+</div>
+
+</div>
+
+<div class="stat-box glass">
+
+<div class="stat-label">
+TOTAL SEARCH
+</div>
+
+<div class="stat-value" id="searchCount">
+0
+</div>
+
+</div>
+
+<div class="stat-box glass">
+
+<div class="stat-label">
+AI STATUS
+</div>
+
+<div class="stat-value">
+ONLINE
 </div>
 
 </div>
@@ -612,7 +844,7 @@ Sistem Pengecekan Barang
 <div class="search-card glass">
 
 <h2 class="section-title">
-🔍 Cari Produk
+🔍 AI Scanner
 </h2>
 
 <input
@@ -622,13 +854,27 @@ class="input-box"
 placeholder="Masukkan Barcode / PLU..."
 >
 
-<button class="btn search-btn" onclick="searchPLU()">
+<button class="btn search-btn" onclick="playSound('click'); searchPLU()">
 Cari Data
 </button>
 
-<button class="btn scan-btn" onclick="startScanner()">
+<button class="btn scan-btn" onclick="playSound('click'); startScanner()">
 📷 Scan Barcode
 </button>
+
+<button class="btn voice-btn" onclick="playSound('click'); startVoiceInput()">
+🎙 Voice Search
+</button>
+
+<div class="ai-loading">
+
+<div class="dot"></div>
+<div class="dot"></div>
+<div class="dot"></div>
+
+AI READY
+
+</div>
 
 <div id="reader"></div>
 
@@ -645,7 +891,7 @@ Cari Data
 </h2>
 
 <p>
-Hasil pencarian barang akan tampil di sini
+Hasil AI Scan akan tampil di sini
 </p>
 
 </div>
@@ -674,9 +920,55 @@ Menunggu pencarian...
 
 </div>
 
-</div>
-
 <script>
+
+/* =========================
+   SOUND AI
+========================= */
+
+const sounds = {
+
+open:new Audio("https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3"),
+
+click:new Audio("https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3"),
+
+success:new Audio("https://assets.mixkit.co/active_storage/sfx/2206/2206-preview.mp3"),
+
+scan:new Audio("https://assets.mixkit.co/active_storage/sfx/2185/2185-preview.mp3"),
+
+error:new Audio("https://assets.mixkit.co/active_storage/sfx/2220/2220-preview.mp3")
+
+};
+
+function playSound(type){
+
+if(sounds[type]){
+
+sounds[type].currentTime = 0;
+
+sounds[type].play();
+
+}
+
+}
+
+/* =========================
+   TEXT TO SPEECH AI
+========================= */
+
+function speak(text){
+
+const speech = new SpeechSynthesisUtterance(text);
+
+speech.lang = "id-ID";
+
+speech.rate = 1;
+
+speech.pitch = 1.1;
+
+window.speechSynthesis.speak(speech);
+
+}
 
 /* =========================
    OPEN APP
@@ -684,14 +976,13 @@ Menunggu pencarian...
 
 function openApp(){
 
+playSound("open");
+
+speak("Selamat datang di Smart AI Barcode System");
+
 document.getElementById("welcomePage").style.display="none";
 
 document.getElementById("appPage").style.display="flex";
-
-window.scrollTo({
-top:0,
-behavior:"smooth"
-});
 
 }
 
@@ -700,6 +991,8 @@ behavior:"smooth"
 ========================= */
 
 let dataExcel = [];
+
+let totalSearch = 0;
 
 const excelURL = "barcode.xlsx";
 
@@ -710,8 +1003,7 @@ fetch(excelURL)
 .then(data => {
 
 const workbook = XLSX.read(data,{
-type:"array",
-cellDates:true
+type:"array"
 });
 
 const sheetName = workbook.SheetNames[0];
@@ -722,35 +1014,21 @@ dataExcel = XLSX.utils.sheet_to_json(sheet,{
 raw:true
 });
 
-console.log(
-"Database berhasil dimuat:",
-dataExcel.length
-);
+document.getElementById("dbCount").innerText =
+dataExcel.length;
+
+speak("Database berhasil dimuat");
 
 })
 
 .catch(err => {
 
-document.getElementById("result").innerHTML = `
-
-<div class="data-box">
-
-<div class="data-label">
-ERROR
-</div>
-
-<div class="data-value">
-Gagal memuat database Excel
-</div>
-
-</div>
-
-`;
+playSound("error");
 
 });
 
 /* =========================
-   CARD RESULT
+   RESULT BOX
 ========================= */
 
 function createBox(label,value){
@@ -777,7 +1055,7 @@ ${value || '-'}
    SEARCH
 ========================= */
 
-function searchPLU(inputManual = null){
+function searchPLU(inputManual=null){
 
 const input =
 inputManual ||
@@ -788,6 +1066,10 @@ const resultDiv =
 document.getElementById("result");
 
 if(!input){
+
+playSound("error");
+
+speak("Silakan masukkan barcode");
 
 resultDiv.innerHTML = `
 
@@ -809,6 +1091,11 @@ return;
 
 }
 
+totalSearch++;
+
+document.getElementById("searchCount").innerText =
+totalSearch;
+
 const result = dataExcel.find(row =>
 
 row.PLU == input ||
@@ -818,35 +1105,32 @@ row.BARCODE == input
 
 if(result){
 
+playSound("success");
+
+speak("Data barang ditemukan");
+
 resultDiv.innerHTML =
 
 createBox("PLU",result.PLU) +
-
 createBox("DESKRIPSI",result.DESC) +
-
 createBox("SUPCO",result.SUPCO) +
-
 createBox("SUPPLIER",result.NAMA_SUPPLIER) +
-
 createBox("KDSB",result.KDSB) +
-
 createBox("TAG",result.TAG) +
-
 createBox("PTAG",formatTanggal(result.PTAG)) +
-
-createBox("BRG AKTIF",result.BRG_AKTIF) +
-
+createBox("BARCODE",result.BARCODE) +
+createBox("STATUS",result.BRG_AKTIF) +
 createBox("COVERAGE",result.COVERAGE) +
-
 createBox("TABLOK",result.TABLOK) +
-
 createBox("LPP 01",result.LPP_01_DCI) +
-
 createBox("LPP 02",result.LPP_02_DCI) +
-
 createBox("LPP 03",result.LPP_03_DCI);
 
 }else{
+
+playSound("error");
+
+speak("Data tidak ditemukan");
 
 resultDiv.innerHTML = `
 
@@ -902,9 +1186,11 @@ return isNaN(parsedDate)
 function formatDateObj(date){
 
 const options = {
+
 day:'2-digit',
 month:'short',
 year:'numeric'
+
 };
 
 return date
@@ -914,17 +1200,21 @@ return date
 }
 
 /* =========================
-   SCANNER
+   BARCODE SCANNER
 ========================= */
 
 function startScanner(){
+
+playSound("scan");
 
 const html5QrCode =
 new Html5Qrcode("reader");
 
 const config = {
+
 fps:10,
 qrbox:220
+
 };
 
 html5QrCode.start(
@@ -933,7 +1223,9 @@ html5QrCode.start(
 
 config,
 
-(decodedText) => {
+(decodedText)=>{
+
+playSound("success");
 
 document.getElementById("searchInput").value =
 decodedText;
@@ -946,29 +1238,70 @@ searchPLU(decodedText);
 
 },
 
-(errorMessage) => {}
+(errorMessage)=>{}
 
-).catch(err => {
+).catch(err=>{
 
-document.getElementById("result").innerHTML = `
+playSound("error");
 
-<div class="data-box">
-
-<div class="data-label">
-ERROR
-</div>
-
-<div class="data-value">
-${err}
-</div>
-
-</div>
-
-`;
+speak("Scanner gagal dibuka");
 
 });
 
 }
+
+/* =========================
+   VOICE SEARCH
+========================= */
+
+function startVoiceInput(){
+
+if(!('webkitSpeechRecognition' in window)){
+
+alert("Browser tidak mendukung voice search");
+
+return;
+
+}
+
+const recognition =
+new webkitSpeechRecognition();
+
+recognition.lang = "id-ID";
+
+recognition.start();
+
+speak("Silakan ucapkan barcode");
+
+recognition.onresult = function(event){
+
+const text =
+event.results[0][0].transcript;
+
+document.getElementById("searchInput").value =
+text;
+
+searchPLU(text);
+
+};
+
+}
+
+/* =========================
+   ENTER SEARCH
+========================= */
+
+document
+.getElementById("searchInput")
+.addEventListener("keypress",function(e){
+
+if(e.key === "Enter"){
+
+searchPLU();
+
+}
+
+});
 
 </script>
 
