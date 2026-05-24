@@ -18,19 +18,11 @@
 
 <style>
 
-/* =========================
-   RESET
-========================= */
-
 *{
 margin:0;
 padding:0;
 box-sizing:border-box;
 }
-
-/* =========================
-   BODY
-========================= */
 
 body{
 
@@ -48,9 +40,7 @@ linear-gradient(135deg,#020617,#07111f,#0f172a);
 color:white;
 }
 
-/* =========================
-   BACKGROUND
-========================= */
+/* BACKGROUND */
 
 .bg1,.bg2,.bg3{
 
@@ -67,8 +57,8 @@ animation:float 10s ease-in-out infinite;
 }
 
 .bg1{
-width:320px;
-height:320px;
+width:280px;
+height:280px;
 background:#22c55e;
 top:-100px;
 left:-100px;
@@ -76,8 +66,8 @@ opacity:.15;
 }
 
 .bg2{
-width:320px;
-height:320px;
+width:280px;
+height:280px;
 background:#06b6d4;
 bottom:-100px;
 right:-100px;
@@ -86,8 +76,8 @@ animation-delay:2s;
 }
 
 .bg3{
-width:240px;
-height:240px;
+width:220px;
+height:220px;
 background:#9333ea;
 top:40%;
 left:40%;
@@ -102,7 +92,7 @@ transform:translateY(0px);
 }
 
 50%{
-transform:translateY(20px);
+transform:translateY(15px);
 }
 
 100%{
@@ -111,9 +101,7 @@ transform:translateY(0px);
 
 }
 
-/* =========================
-   PAGE
-========================= */
+/* PAGE */
 
 .page{
 
@@ -125,82 +113,72 @@ align-items:center;
 
 justify-content:center;
 
-padding:20px;
+padding:16px;
 }
 
-/* =========================
-   CONTAINER
-========================= */
+/* CONTAINER */
 
 .container{
 
 width:100%;
 
-max-width:1100px;
+max-width:1000px;
 }
 
-/* =========================
-   GLASS
-========================= */
+/* GLASS */
 
 .glass{
 
-background:rgba(255,255,255,0.06);
+background:rgba(255,255,255,0.05);
 
-border:1px solid rgba(255,255,255,0.08);
+border:1px solid rgba(255,255,255,0.06);
 
 backdrop-filter:blur(18px);
 
 box-shadow:
 0 10px 40px rgba(0,0,0,0.35);
 
-transition:.35s;
+transition:.3s;
 }
 
 .glass:hover{
 
-transform:translateY(-3px);
-
-box-shadow:
-0 15px 40px rgba(34,197,94,.08),
-0 10px 25px rgba(6,182,212,.08);
+transform:translateY(-2px);
 }
 
-/* =========================
-   WELCOME
-========================= */
+/* WELCOME */
 
 .welcome-box{
 
-padding:50px 35px;
+padding:40px 28px;
 
-border-radius:30px;
+border-radius:28px;
 
 text-align:center;
 
-animation:fadeUp .8s ease;
+animation:fadeUp .7s ease;
 }
 
 .logo-circle{
 
-width:95px;
-height:95px;
+width:82px;
+height:82px;
 
-border-radius:28px;
+border-radius:24px;
 
-margin:auto auto 24px;
+margin:auto auto 18px;
 
 display:flex;
 align-items:center;
 justify-content:center;
 
-font-size:40px;
+font-size:34px;
 
 background:
 linear-gradient(135deg,#22c55e,#06b6d4);
 
 box-shadow:
-0 10px 35px rgba(34,197,94,.3);
+0 10px 30px rgba(34,197,94,.25);
 
 animation:pulse 2s infinite;
 }
@@ -212,7 +190,7 @@ transform:scale(1);
 }
 
 50%{
-transform:scale(1.06);
+transform:scale(1.05);
 }
 
 100%{
@@ -223,13 +201,13 @@ transform:scale(1);
 
 .welcome-title{
 
-font-size:46px;
+font-size:38px;
 
 font-weight:800;
 
 line-height:1.1;
 
-margin-bottom:18px;
+margin-bottom:16px;
 
 background:
 linear-gradient(to right,#22c55e,#38bdf8,#ffffff);
@@ -240,28 +218,28 @@ linear-gradient(to right,#22c55e,#38bdf8,#ffffff);
 
 .welcome-sub{
 
-max-width:650px;
+max-width:600px;
 
 margin:auto;
 
-line-height:1.9;
+line-height:1.8;
 
 color:#cbd5e1;
 
-font-size:15px;
+font-size:14px;
 
-margin-bottom:30px;
+margin-bottom:26px;
 }
 
 .enter-btn{
 
 border:none;
 
-padding:15px 35px;
+padding:13px 28px;
 
 border-radius:50px;
 
-font-size:15px;
+font-size:14px;
 
 font-weight:700;
 
@@ -275,20 +253,15 @@ linear-gradient(135deg,#22c55e,#06b6d4);
 transition:.3s;
 
 box-shadow:
-0 10px 30px rgba(34,197,94,.25);
+0 10px 30px rgba(34,197,94,.2);
 }
 
 .enter-btn:hover{
 
-transform:translateY(-3px);
-
-box-shadow:
-0 18px 35px rgba(34,197,94,.35);
+transform:translateY(-2px);
 }
 
-/* =========================
-   APP
-========================= */
+/* APP */
 
 #appPage{
 display:none;
@@ -302,11 +275,11 @@ justify-content:space-between;
 
 align-items:center;
 
-padding:20px 24px;
+padding:16px 20px;
 
-border-radius:24px;
+border-radius:20px;
 
-margin-bottom:20px;
+margin-bottom:16px;
 }
 
 .brand{
@@ -315,21 +288,21 @@ display:flex;
 
 align-items:center;
 
-gap:14px;
+gap:12px;
 }
 
 .brand-icon{
 
-width:55px;
-height:55px;
+width:50px;
+height:50px;
 
-border-radius:18px;
+border-radius:16px;
 
 display:flex;
 align-items:center;
 justify-content:center;
 
-font-size:24px;
+font-size:22px;
 
 background:
 linear-gradient(135deg,#22c55e,#06b6d4);
@@ -337,29 +310,27 @@ linear-gradient(135deg,#22c55e,#06b6d4);
 
 .brand h2{
 
-font-size:24px;
+font-size:20px;
 
 font-weight:700;
 }
 
 .brand p{
 
-font-size:12px;
+font-size:11px;
 
 color:#cbd5e1;
 }
 
-/* =========================
-   STATS
-========================= */
+/* STATS */
 
 .stats{
 
 display:flex;
 
-gap:14px;
+gap:12px;
 
-margin-bottom:20px;
+margin-bottom:16px;
 
 flex-wrap:wrap;
 }
@@ -368,94 +339,96 @@ flex-wrap:wrap;
 
 flex:1;
 
-min-width:180px;
+min-width:150px;
+
+padding:16px;
+
+border-radius:18px;
+}
+
+.stat-label{
+
+font-size:11px;
+
+color:#94a3b8;
+
+margin-bottom:6px;
+}
+
+.stat-value{
+
+font-size:22px;
+
+font-weight:700;
+}
+
+/* GRID */
+
+.main-grid{
+
+display:grid;
+
+grid-template-columns:280px 1fr;
+
+gap:16px;
+
+align-items:start;
+}
+
+/* CARD */
+
+.search-card,
+.result-card{
 
 padding:18px;
 
 border-radius:20px;
 }
 
-.stat-label{
-
-font-size:12px;
-
-color:#94a3b8;
-
-margin-bottom:8px;
-}
-
-.stat-value{
-
-font-size:28px;
-
-font-weight:700;
-}
-
-/* =========================
-   GRID
-========================= */
-
-.main-grid{
-
-display:grid;
-
-grid-template-columns:320px 1fr;
-
-gap:20px;
-}
-
-.search-card,
-.result-card{
-
-padding:24px;
-
-border-radius:24px;
-}
-
 .section-title{
 
-font-size:22px;
+font-size:18px;
 
 font-weight:700;
 
-margin-bottom:20px;
+margin-bottom:14px;
 }
 
-/* =========================
-   INPUT
-========================= */
+/* INPUT */
 
 .input-box{
 
 width:100%;
 
-padding:15px 16px;
+padding:13px 14px;
 
 border:none;
 
 outline:none;
 
-border-radius:16px;
+border-radius:14px;
 
-background:rgba(255,255,255,.06);
+background:rgba(255,255,255,.05);
 
 color:white;
 
-font-size:14px;
+font-size:13px;
 
-margin-bottom:14px;
+margin-bottom:10px;
 
-border:1px solid rgba(255,255,255,.06);
+border:1px solid rgba(255,255,255,.05);
 
 transition:.3s;
 }
 
 .input-box:focus{
 
-border:1px solid #22c55e;
+border:1px solid #38bdf8;
+
+transform:scale(1.01);
 
 box-shadow:
-0 0 20px rgba(34,197,94,.2);
+0 0 20px rgba(56,189,248,.15);
 }
 
 .input-box::placeholder{
@@ -463,9 +436,7 @@ box-shadow:
 color:#94a3b8;
 }
 
-/* =========================
-   BUTTON
-========================= */
+/* BUTTON */
 
 .btn{
 
@@ -473,11 +444,11 @@ width:100%;
 
 border:none;
 
-padding:15px;
+padding:13px;
 
-border-radius:16px;
+border-radius:14px;
 
-font-size:14px;
+font-size:13px;
 
 font-weight:700;
 
@@ -485,12 +456,16 @@ color:white;
 
 cursor:pointer;
 
-transition:.3s;
+transition:.25s;
+
+letter-spacing:.4px;
 }
 
 .btn:hover{
 
-transform:translateY(-2px);
+transform:translateY(-2px) scale(1.01);
+
+filter:brightness(1.08);
 }
 
 .search-btn{
@@ -498,7 +473,7 @@ transform:translateY(-2px);
 background:
 linear-gradient(135deg,#22c55e,#06b6d4);
 
-margin-bottom:12px;
+margin-bottom:10px;
 }
 
 .scan-btn{
@@ -506,18 +481,18 @@ margin-bottom:12px;
 background:
 linear-gradient(135deg,#8b5cf6,#ec4899);
 
-margin-bottom:12px;
+margin-bottom:10px;
 }
 
 .voice-btn{
 
 background:
 linear-gradient(135deg,#f59e0b,#ef4444);
+
+margin-bottom:10px;
 }
 
-/* =========================
-   AI LOADING
-========================= */
+/* AI LOADING */
 
 .ai-loading{
 
@@ -527,17 +502,17 @@ align-items:center;
 
 gap:8px;
 
-margin-top:15px;
+margin-top:12px;
 
 color:#38bdf8;
 
-font-size:13px;
+font-size:12px;
 }
 
 .dot{
 
-width:8px;
-height:8px;
+width:7px;
+height:7px;
 
 border-radius:50%;
 
@@ -566,17 +541,15 @@ transform:scale(1);
 
 }
 
-/* =========================
-   VOICE NOTICE
-========================= */
+/* VOICE */
 
 .voice-notice{
 
-margin-top:15px;
+margin-top:12px;
 
-padding:14px;
+padding:12px;
 
-border-radius:16px;
+border-radius:14px;
 
 background:
 linear-gradient(
@@ -587,20 +560,15 @@ rgba(236,72,153,.15)
 
 border:1px solid rgba(255,255,255,.08);
 
-font-size:14px;
+font-size:13px;
 
 font-weight:600;
 
 text-align:center;
 
-color:#ffffff;
-
 display:none;
 
 animation:pulseVoice 1.2s infinite;
-
-box-shadow:
-0 0 20px rgba(168,85,247,.15);
 }
 
 @keyframes pulseVoice{
@@ -622,40 +590,36 @@ opacity:.8;
 
 }
 
-/* =========================
-   SCANNER
-========================= */
+/* SCANNER */
 
 #reader{
 
-margin-top:20px;
+margin-top:14px;
 
 overflow:hidden;
 
-border-radius:20px;
+border-radius:18px;
 
 border:1px solid rgba(255,255,255,.08);
 }
 
-/* =========================
-   RESULT
-========================= */
+/* RESULT */
 
 .result-header{
 
-margin-bottom:24px;
+margin-bottom:18px;
 }
 
 .result-header h2{
 
-font-size:28px;
+font-size:22px;
 
-margin-bottom:5px;
+margin-bottom:4px;
 }
 
 .result-header p{
 
-font-size:14px;
+font-size:13px;
 
 color:#cbd5e1;
 }
@@ -666,7 +630,7 @@ display:grid;
 
 grid-template-columns:1fr 1fr;
 
-gap:14px;
+gap:10px;
 }
 
 .data-box{
@@ -675,56 +639,20 @@ position:relative;
 
 overflow:hidden;
 
-padding:18px;
+padding:14px;
 
-border-radius:18px;
+border-radius:16px;
 
-background:rgba(255,255,255,.05);
+background:rgba(255,255,255,.04);
 
-border:1px solid rgba(255,255,255,.05);
+border:1px solid rgba(255,255,255,.04);
 
-animation:fadeUp .4s ease;
-}
-
-.data-box::before{
-
-content:'';
-
-position:absolute;
-
-inset:0;
-
-background:
-linear-gradient(
-120deg,
-transparent,
-rgba(255,255,255,.08),
-transparent);
-
-transform:translateX(-100%);
-
-animation:shine 4s infinite;
-}
-
-@keyframes shine{
-
-0%{
-transform:translateX(-100%);
-}
-
-40%{
-transform:translateX(120%);
-}
-
-100%{
-transform:translateX(120%);
-}
-
+animation:fadeUp .3s ease;
 }
 
 .data-label{
 
-font-size:12px;
+font-size:11px;
 
 color:#38bdf8;
 
@@ -733,18 +661,16 @@ margin-bottom:6px;
 
 .data-value{
 
-font-size:14px;
+font-size:13px;
 
 font-weight:600;
 
-line-height:1.6;
+line-height:1.5;
 
 word-break:break-word;
 }
 
-/* =========================
-   MOBILE
-========================= */
+/* MOBILE */
 
 @media(max-width:850px){
 
@@ -757,40 +683,18 @@ grid-template-columns:1fr;
 }
 
 .welcome-title{
-font-size:34px;
+font-size:30px;
 }
 
 }
 
-@media(max-width:500px){
-
-.welcome-box{
-padding:38px 24px;
-}
-
-.welcome-title{
-font-size:28px;
-}
-
-.topbar{
-padding:16px;
-}
-
-.brand h2{
-font-size:18px;
-}
-
-}
-
-/* =========================
-   ANIMATION
-========================= */
+/* ANIMATION */
 
 @keyframes fadeUp{
 
 from{
 opacity:0;
-transform:translateY(30px);
+transform:translateY(20px);
 }
 
 to{
@@ -806,15 +710,11 @@ transform:translateY(0);
 
 <body>
 
-<!-- BACKGROUND -->
-
 <div class="bg1"></div>
 <div class="bg2"></div>
 <div class="bg3"></div>
 
-<!-- =========================
-     PAGE 1
-========================= -->
+<!-- WELCOME -->
 
 <div class="page" id="welcomePage">
 
@@ -833,14 +733,11 @@ BARCODE SYSTEM
 
 <p class="welcome-sub">
 
-Sistem pengecekan barang modern berbasis AI Interface.
-
 ✔ Barcode Scanner AI  
 ✔ Voice Assistant  
 ✔ Database Excel  
 ✔ AI Sound Effects  
 ✔ Premium Dashboard  
-✔ Neon Cyber UI  
 
 </p>
 
@@ -854,9 +751,7 @@ Sistem pengecekan barang modern berbasis AI Interface.
 
 </div>
 
-<!-- =========================
-     APP PAGE
-========================= -->
+<!-- APP -->
 
 <div class="page" id="appPage">
 
@@ -876,7 +771,7 @@ Sistem pengecekan barang modern berbasis AI Interface.
 
 <h2>SMART AI BARCODE</h2>
 
-<p>Sistem Pengecekan Barang Modern</p>
+<p>Sistem Pengecekan Barang</p>
 
 </div>
 
@@ -945,16 +840,20 @@ class="input-box"
 placeholder="Masukkan Barcode / PLU..."
 >
 
-<button class="btn search-btn" onclick="playSound('click'); searchPLU()">
+<button class="btn search-btn" onclick="searchPLU()">
 Cari Data
 </button>
 
-<button class="btn scan-btn" onclick="playSound('click'); startScanner()">
+<button class="btn scan-btn" onclick="startScanner()">
 📷 Scan Barcode
 </button>
 
-<button class="btn voice-btn" onclick="playSound('click'); startVoiceInput()">
+<button class="btn voice-btn" onclick="startVoiceInput()">
 🎙 Voice Search
+</button>
+
+<button class="btn scan-btn" onclick="stopVoiceInput()">
+🛑 Selesai Bicara
 </button>
 
 <div class="ai-loading">
@@ -967,11 +866,15 @@ AI READY
 
 </div>
 
-<!-- NOTICE VOICE -->
-
 <div id="voiceNotice" class="voice-notice">
 
-🎤 AI sedang bersiap...
+🎤 AI sedang mendengarkan...
+
+</div>
+
+<div id="voiceResult" class="voice-notice" style="margin-top:10px;">
+
+🧠 Hasil suara: -
 
 </div>
 
@@ -1021,9 +924,7 @@ Menunggu pencarian...
 
 <script>
 
-/* =========================
-   SOUND AI
-========================= */
+/* SOUND */
 
 const sounds = {
 
@@ -1051,9 +952,7 @@ sounds[type].play();
 
 }
 
-/* =========================
-   TEXT TO SPEECH AI
-========================= */
+/* SPEAK */
 
 function speak(text){
 
@@ -1072,15 +971,11 @@ window.speechSynthesis.speak(speech);
 
 }
 
-/* =========================
-   OPEN APP
-========================= */
+/* OPEN APP */
 
 function openApp(){
 
 playSound("open");
-
-speak("Selamat datang di Smart AI Barcode System");
 
 document.getElementById("welcomePage").style.display="none";
 
@@ -1088,9 +983,7 @@ document.getElementById("appPage").style.display="flex";
 
 }
 
-/* =========================
-   DATABASE
-========================= */
+/* DATABASE */
 
 let dataExcel = [];
 
@@ -1119,8 +1012,6 @@ raw:true
 document.getElementById("dbCount").innerText =
 dataExcel.length;
 
-speak("Aplikasi berhasil dimuat");
-
 })
 
 .catch(err => {
@@ -1129,9 +1020,7 @@ playSound("error");
 
 });
 
-/* =========================
-   RESULT BOX
-========================= */
+/* RESULT BOX */
 
 function createBox(label,value){
 
@@ -1153,9 +1042,7 @@ ${value || '-'}
 
 }
 
-/* =========================
-   SEARCH
-========================= */
+/* SEARCH */
 
 function searchPLU(inputManual=null){
 
@@ -1170,24 +1057,6 @@ document.getElementById("result");
 if(!input){
 
 playSound("error");
-
-speak("Silakan masukkan barcode atau PLU");
-
-resultDiv.innerHTML = `
-
-<div class="data-box">
-
-<div class="data-label">
-INFO
-</div>
-
-<div class="data-value">
-Silakan masukkan barcode atau PLU
-</div>
-
-</div>
-
-`;
 
 return;
 
@@ -1209,30 +1078,18 @@ if(result){
 
 playSound("success");
 
-speak("Data barang ditemukan");
-
 resultDiv.innerHTML =
 
 createBox("PLU",result.PLU) +
 createBox("DESKRIPSI",result.DESC) +
 createBox("SUPCO",result.SUPCO) +
 createBox("SUPPLIER",result.NAMA_SUPPLIER) +
-createBox("KDSB",result.KDSB) +
-createBox("TAG",result.TAG) +
-createBox("PTAG",formatTanggal(result.PTAG)) +
 createBox("BARCODE",result.BARCODE) +
-createBox("STATUS",result.BRG_AKTIF) +
-createBox("COVERAGE",result.COVERAGE) +
-createBox("TABLOK",result.TABLOK) +
-createBox("LPP 01",result.LPP_01_DCI) +
-createBox("LPP 02",result.LPP_02_DCI) +
-createBox("LPP 03",result.LPP_03_DCI);
+createBox("STATUS",result.BRG_AKTIF);
 
 }else{
 
 playSound("error");
-
-speak("Data tidak ditemukan");
 
 resultDiv.innerHTML = `
 
@@ -1254,56 +1111,7 @@ HASIL
 
 }
 
-/* =========================
-   FORMAT TANGGAL
-========================= */
-
-function formatTanggal(nilai){
-
-if(!nilai) return '-';
-
-if(typeof nilai === 'number'){
-
-const excelEpoch =
-new Date(Date.UTC(1899,11,30));
-
-const result =
-new Date(
-excelEpoch.getTime() +
-nilai * 86400000
-);
-
-return formatDateObj(result);
-
-}
-
-const parsedDate = new Date(nilai);
-
-return isNaN(parsedDate)
-? nilai
-: formatDateObj(parsedDate);
-
-}
-
-function formatDateObj(date){
-
-const options = {
-
-day:'2-digit',
-month:'short',
-year:'numeric'
-
-};
-
-return date
-.toLocaleDateString('id-ID',options)
-.replace(/ /g,'-');
-
-}
-
-/* =========================
-   BARCODE SCANNER
-========================= */
+/* SCANNER */
 
 function startScanner(){
 
@@ -1312,18 +1120,14 @@ playSound("scan");
 const html5QrCode =
 new Html5Qrcode("reader");
 
-const config = {
-
-fps:10,
-qrbox:220
-
-};
-
 html5QrCode.start(
 
 { facingMode:"environment" },
 
-config,
+{
+fps:10,
+qrbox:200
+},
 
 (decodedText)=>{
 
@@ -1346,15 +1150,15 @@ searchPLU(decodedText);
 
 playSound("error");
 
-speak("Scanner gagal dibuka");
-
 });
 
 }
 
-/* =========================
-   VOICE SEARCH AI
-========================= */
+/* VOICE */
+
+let recognition;
+
+let voiceListening = false;
 
 function startVoiceInput(){
 
@@ -1366,64 +1170,53 @@ return;
 
 }
 
+if(voiceListening) return;
+
+voiceListening = true;
+
 playSound("click");
 
 const notice =
 document.getElementById("voiceNotice");
 
-/* =========================
-   PERSIAPAN
-========================= */
+const voiceResult =
+document.getElementById("voiceResult");
 
 notice.style.display = "block";
 
-notice.innerHTML =
-"🤖 AI sedang bersiap mendengarkan...";
-
-speak("Silakan sebutkan barcode atau PLU setelah bunyi beep");
-
-/* =========================
-   DELAY 4 DETIK
-========================= */
-
-setTimeout(()=>{
-
-playSound("scan");
-
-/* =========================
-   MULAI DENGAR
-========================= */
+voiceResult.style.display = "block";
 
 notice.innerHTML =
-"🎤 AI sedang mendengarkan... Silakan bicara";
+"🎤 AI sedang mendengarkan...";
 
-const recognition =
+voiceResult.innerHTML =
+"🧠 Hasil suara: ...";
+
+recognition =
 new webkitSpeechRecognition();
 
 recognition.lang = "id-ID";
 
-recognition.continuous = false;
+recognition.continuous = true;
 
-recognition.interimResults = false;
+recognition.interimResults = true;
+
+recognition.maxAlternatives = 5;
 
 recognition.start();
 
-/* =========================
-   HASIL VOICE
-========================= */
-
 recognition.onresult = function(event){
 
-let text =
-event.results[0][0].transcript
-.toLowerCase();
+let finalText = "";
 
-notice.innerHTML =
-"🧠 AI memproses suara...";
+for(let i=0; i<event.results.length; i++){
 
-/* =========================
-   KONVERSI ANGKA
-========================= */
+finalText +=
+event.results[i][0].transcript;
+
+}
+
+finalText = finalText.toLowerCase();
 
 const angkaMap = {
 
@@ -1440,78 +1233,76 @@ const angkaMap = {
 
 };
 
-/* =========================
-   UBAH KATA JADI ANGKA
-========================= */
-
 Object.keys(angkaMap).forEach(kata=>{
 
 const regex =
 new RegExp("\\b"+kata+"\\b","g");
 
-text = text.replace(regex,angkaMap[kata]);
+finalText =
+finalText.replace(regex,angkaMap[kata]);
 
 });
 
-/* =========================
-   HAPUS SPASI
-========================= */
+finalText =
+finalText.replace(/\s+/g,'');
 
-text = text.replace(/\s+/g,'');
-
-/* =========================
-   INPUT OTOMATIS
-========================= */
+voiceResult.innerHTML =
+"🧠 Hasil suara: <b>" +
+finalText +
+"</b>";
 
 document.getElementById("searchInput").value =
-text;
-
-playSound("success");
-
-speak("Mencari data");
-
-searchPLU(text);
-
-/* =========================
-   SELESAI
-========================= */
-
-setTimeout(()=>{
-
-notice.style.display = "none";
-
-},2500);
+finalText;
 
 };
-
-/* =========================
-   ERROR
-========================= */
 
 recognition.onerror = function(){
 
 playSound("error");
 
-notice.innerHTML =
-"❌ Voice scanner gagal";
-
-speak("Voice scanner gagal");
-
-setTimeout(()=>{
-
-notice.style.display = "none";
-
-},2500);
+voiceListening = false;
 
 };
 
-},4000);
+}
+
+/* STOP VOICE */
+
+function stopVoiceInput(){
+
+if(recognition){
+
+recognition.stop();
 
 }
 
-/* =========================
-   ENTER SEARCH
-========================= */
+voiceListening = false;
+
+const text =
+document.getElementById("searchInput")
+.value.trim();
+
+document.getElementById("voiceNotice").innerHTML =
+"✅ Voice selesai";
+
+setTimeout(()=>{
+
+document.getElementById("voiceNotice")
+.style.display = "none";
+
+},1200);
+
+if(text){
+
+playSound("success");
+
+searchPLU(text);
+
+}
+
+}
+
+/* ENTER */
 
 document
 .getElementById("searchInput")
