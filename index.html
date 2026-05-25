@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="id">
-
 <head>
 
 <meta charset="UTF-8">
@@ -8,16 +7,14 @@
 
 <title>SMART AI BARCODE SYSTEM</title>
 
-<link rel="icon"
-href="https://upload.wikimedia.org/wikipedia/en/thumb/7/70/Kimetsu_no_Yaiba_logo.svg/320px-Kimetsu_no_Yaiba_logo.svg.png">
+<link rel="icon" href="https://upload.wikimedia.org/wikipedia/en/thumb/7/70/Kimetsu_no_Yaiba_logo.svg/320px-Kimetsu_no_Yaiba_logo.svg.png">
 
 <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 <script src="https://unpkg.com/html5-qrcode"></script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
-rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
 
@@ -85,31 +82,45 @@ animation-delay:4s;
 100%{transform:translateY(0px);}
 }
 
+/* PAGE */
+
 .page{
 min-height:100vh;
 display:flex;
 align-items:center;
 justify-content:center;
 padding:16px;
-transition:.5s;
+transition:0.5s;
 }
+
+/* CONTAINER */
 
 .container{
 width:100%;
 max-width:1000px;
 }
 
+/* GLASS */
+
 .glass{
-background:rgba(255,255,255,.05);
-border:1px solid rgba(255,255,255,.06);
+background:rgba(255,255,255,0.05);
+border:1px solid rgba(255,255,255,0.06);
 backdrop-filter:blur(18px);
-box-shadow:0 10px 40px rgba(0,0,0,.35);
+box-shadow:0 10px 40px rgba(0,0,0,0.35);
+transition:.3s;
 }
+
+.glass:hover{
+transform:translateY(-2px);
+}
+
+/* WELCOME */
 
 .welcome-box{
 padding:40px 28px;
 border-radius:28px;
 text-align:center;
+animation:fadeUp .7s ease;
 }
 
 .logo-circle{
@@ -122,6 +133,14 @@ align-items:center;
 justify-content:center;
 font-size:34px;
 background:linear-gradient(135deg,#22c55e,#06b6d4);
+box-shadow:0 10px 30px rgba(34,197,94,.25);
+animation:pulse 2s infinite;
+}
+
+@keyframes pulse{
+0%{transform:scale(1);}
+50%{transform:scale(1.05);}
+100%{transform:scale(1);}
 }
 
 .welcome-title{
@@ -153,11 +172,21 @@ font-weight:700;
 cursor:pointer;
 color:white;
 background:linear-gradient(135deg,#22c55e,#06b6d4);
+transition:.3s;
+box-shadow:0 10px 30px rgba(34,197,94,.2);
 }
+
+.enter-btn:hover{
+transform:translateY(-2px) scale(1.03);
+}
+
+/* APP */
 
 #appPage{
 display:none;
 }
+
+/* TOPBAR */
 
 .topbar{
 display:flex;
@@ -185,6 +214,18 @@ font-size:22px;
 background:linear-gradient(135deg,#22c55e,#06b6d4);
 }
 
+.brand h2{
+font-size:20px;
+font-weight:700;
+}
+
+.brand p{
+font-size:11px;
+color:#cbd5e1;
+}
+
+/* STATS */
+
 .stats{
 display:flex;
 gap:12px;
@@ -210,11 +251,16 @@ font-size:22px;
 font-weight:700;
 }
 
+/* GRID */
+
 .main-grid{
 display:grid;
 grid-template-columns:280px 1fr;
 gap:16px;
+align-items:start;
 }
+
+/* CARD */
 
 .search-card,
 .result-card{
@@ -228,6 +274,8 @@ font-weight:700;
 margin-bottom:14px;
 }
 
+/* INPUT */
+
 .input-box{
 width:100%;
 padding:13px 14px;
@@ -238,11 +286,21 @@ background:rgba(255,255,255,.05);
 color:white;
 font-size:13px;
 margin-bottom:10px;
+border:1px solid rgba(255,255,255,.05);
+transition:.3s;
+}
+
+.input-box:focus{
+border:1px solid #38bdf8;
+transform:scale(1.01);
+box-shadow:0 0 20px rgba(56,189,248,.15);
 }
 
 .input-box::placeholder{
 color:#94a3b8;
 }
+
+/* BUTTON */
 
 .btn{
 width:100%;
@@ -253,20 +311,31 @@ font-size:13px;
 font-weight:700;
 color:white;
 cursor:pointer;
-margin-bottom:10px;
+transition:.25s;
+letter-spacing:.4px;
+}
+
+.btn:hover{
+transform:translateY(-2px) scale(1.01);
+filter:brightness(1.08);
 }
 
 .search-btn{
 background:linear-gradient(135deg,#22c55e,#06b6d4);
+margin-bottom:10px;
 }
 
 .scan-btn{
 background:linear-gradient(135deg,#8b5cf6,#ec4899);
+margin-bottom:10px;
 }
 
 .voice-btn{
 background:linear-gradient(135deg,#f59e0b,#ef4444);
+margin-bottom:10px;
 }
+
+/* LOADING */
 
 .ai-loading{
 display:flex;
@@ -294,18 +363,73 @@ animation-delay:.4s;
 }
 
 @keyframes bounce{
-0%,80%,100%{
-transform:scale(0);
+0%,80%,100%{transform:scale(0);}
+40%{transform:scale(1);}
 }
-40%{
+
+/* VOICE */
+
+.voice-notice{
+margin-top:12px;
+padding:12px;
+border-radius:14px;
+
+background:
+linear-gradient(
+135deg,
+rgba(139,92,246,.15),
+rgba(236,72,153,.15)
+);
+
+border:1px solid rgba(255,255,255,.08);
+
+font-size:13px;
+font-weight:600;
+text-align:center;
+
+display:none;
+
+animation:pulseVoice 1.2s infinite;
+}
+
+@keyframes pulseVoice{
+0%{
 transform:scale(1);
+opacity:.8;
+}
+50%{
+transform:scale(1.02);
+opacity:1;
+}
+100%{
+transform:scale(1);
+opacity:.8;
 }
 }
+
+/* SCANNER */
 
 #reader{
 margin-top:14px;
 overflow:hidden;
 border-radius:18px;
+border:1px solid rgba(255,255,255,.08);
+}
+
+/* RESULT */
+
+.result-header{
+margin-bottom:18px;
+}
+
+.result-header h2{
+font-size:22px;
+margin-bottom:4px;
+}
+
+.result-header p{
+font-size:13px;
+color:#cbd5e1;
 }
 
 .result-grid{
@@ -315,10 +439,13 @@ gap:10px;
 }
 
 .data-box{
+position:relative;
+overflow:hidden;
 padding:14px;
 border-radius:16px;
 background:rgba(255,255,255,.04);
 border:1px solid rgba(255,255,255,.04);
+animation:fadeUp .3s ease;
 }
 
 .data-label{
@@ -330,8 +457,11 @@ margin-bottom:6px;
 .data-value{
 font-size:13px;
 font-weight:600;
+line-height:1.5;
 word-break:break-word;
 }
+
+/* MOBILE */
 
 @media(max-width:850px){
 
@@ -343,6 +473,23 @@ grid-template-columns:1fr;
 grid-template-columns:1fr;
 }
 
+.welcome-title{
+font-size:30px;
+}
+
+}
+
+/* ANIMATION */
+
+@keyframes fadeUp{
+from{
+opacity:0;
+transform:translateY(20px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
 }
 
 </style>
@@ -415,12 +562,15 @@ BARCODE SYSTEM
 
 </div>
 
+<!-- STATS -->
+
 <div class="stats">
 
 <div class="stat-box glass">
 <div class="stat-label">
 TOTAL DATABASE
 </div>
+
 <div class="stat-value" id="dbCount">
 0
 </div>
@@ -430,6 +580,7 @@ TOTAL DATABASE
 <div class="stat-label">
 TOTAL SEARCH
 </div>
+
 <div class="stat-value" id="searchCount">
 0
 </div>
@@ -439,12 +590,15 @@ TOTAL SEARCH
 <div class="stat-label">
 AI STATUS
 </div>
+
 <div class="stat-value">
 ONLINE
 </div>
 </div>
 
 </div>
+
+<!-- MAIN -->
 
 <div class="main-grid">
 
@@ -475,6 +629,10 @@ Cari Data
 🎙 Voice Search
 </button>
 
+<button class="btn scan-btn" onclick="stopVoiceInput()">
+🛑 Cek Hasil
+</button>
+
 <div class="ai-loading">
 
 <div class="dot"></div>
@@ -485,6 +643,14 @@ AI READY
 
 </div>
 
+<div id="voiceNotice" class="voice-notice">
+🎤 AI sedang mendengarkan...
+</div>
+
+<div id="voiceResult" class="voice-notice" style="margin-top:10px;">
+🧠 Hasil suara: -
+</div>
+
 <div id="reader"></div>
 
 </div>
@@ -493,9 +659,17 @@ AI READY
 
 <div class="result-card glass">
 
-<h2 class="section-title">
+<div class="result-header">
+
+<h2>
 📄 Detail Barang
 </h2>
+
+<p>
+Hasil AI Scan akan tampil di sini
+</p>
+
+</div>
 
 <div class="result-grid" id="result">
 
@@ -529,6 +703,10 @@ const sounds = {
 
 open:new Audio("https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3"),
 
+click:new Audio("https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3"),
+
+ai:new Audio("https://assets.mixkit.co/active_storage/sfx/209/209-preview.mp3"),
+
 success:new Audio("https://assets.mixkit.co/active_storage/sfx/2206/2206-preview.mp3"),
 
 scan:new Audio("https://assets.mixkit.co/active_storage/sfx/2185/2185-preview.mp3"),
@@ -560,6 +738,10 @@ new SpeechSynthesisUtterance(text);
 
 speech.lang = "id-ID";
 
+speech.rate = 1;
+
+speech.pitch = 1.1;
+
 window.speechSynthesis.speak(speech);
 
 }
@@ -570,11 +752,34 @@ function openApp(){
 
 playSound("open");
 
-document.getElementById("welcomePage").style.display =
-"none";
+setTimeout(()=>{
 
-document.getElementById("appPage").style.display =
-"flex";
+playSound("ai");
+
+},300);
+
+setTimeout(()=>{
+
+speak(
+"Selamat datang di Smart A I Barcode System. Sistem siap digunakan."
+);
+
+},700);
+
+/* TRANSISI */
+
+document.getElementById("welcomePage").style.opacity = "0";
+
+setTimeout(()=>{
+
+document.getElementById("welcomePage").style.display="none";
+
+document.getElementById("appPage").style.display="flex";
+
+document.getElementById("appPage").style.animation =
+"fadeUp .6s ease";
+
+},500);
 
 }
 
@@ -601,8 +806,7 @@ const sheetName = workbook.SheetNames[0];
 const sheet = workbook.Sheets[sheetName];
 
 dataExcel = XLSX.utils.sheet_to_json(sheet,{
-raw:true,
-defval:""
+raw:true
 });
 
 document.getElementById("dbCount").innerText =
@@ -819,6 +1023,8 @@ playSound("error");
 
 let recognition;
 
+let voiceListening = false;
+
 function startVoiceInput(){
 
 if(!('webkitSpeechRecognition' in window)){
@@ -829,28 +1035,133 @@ return;
 
 }
 
+if(voiceListening) return;
+
+playSound("click");
+
+voiceListening = true;
+
+const notice =
+document.getElementById("voiceNotice");
+
+const voiceResult =
+document.getElementById("voiceResult");
+
+notice.style.display = "block";
+
+voiceResult.style.display = "block";
+
+notice.innerHTML =
+"🎤 AI sedang mendengarkan...";
+
+voiceResult.innerHTML =
+"🧠 Hasil suara: ...";
+
 recognition =
 new webkitSpeechRecognition();
 
 recognition.lang = "id-ID";
 
+recognition.continuous = true;
+
+recognition.interimResults = true;
+
+recognition.maxAlternatives = 1;
+
+/* HASIL SUARA */
+
 recognition.onresult = function(event){
 
-let text =
-event.results[0][0].transcript;
+let finalText = "";
 
-text = text
+for(let i = event.resultIndex; i < event.results.length; i++){
+
+finalText += event.results[i][0].transcript;
+
+}
+
+/* BERSIHKAN */
+
+finalText = finalText
 .replace(/\s+/g,'')
-.toUpperCase();
+.replace(/-/g,'')
+.replace(/\./g,'')
+.replace(/,/g,'');
+
+/* HURUF BESAR */
+
+finalText = finalText.toUpperCase();
+
+voiceResult.innerHTML =
+"🧠 Hasil suara: <b>" +
+finalText +
+"</b>";
 
 document.getElementById("searchInput").value =
-text;
-
-searchPLU(text);
+finalText;
 
 };
 
+/* ERROR */
+
+recognition.onerror = function(){
+
+playSound("error");
+
+voiceListening = false;
+
+notice.innerHTML =
+"❌ Voice Error";
+
+};
+
+/* END */
+
+recognition.onend = function(){
+
+voiceListening = false;
+
+};
+
+/* START */
+
 recognition.start();
+
+}
+
+/* STOP VOICE */
+
+function stopVoiceInput(){
+
+if(recognition){
+
+recognition.stop();
+
+}
+
+voiceListening = false;
+
+const text =
+document.getElementById("searchInput")
+.value.trim();
+
+document.getElementById("voiceNotice").innerHTML =
+"✅ Voice selesai";
+
+setTimeout(()=>{
+
+document.getElementById("voiceNotice")
+.style.display = "none";
+
+},1200);
+
+if(text){
+
+playSound("success");
+
+searchPLU(text);
+
+}
 
 }
 
@@ -871,5 +1182,4 @@ searchPLU();
 </script>
 
 </body>
-
 </html>
