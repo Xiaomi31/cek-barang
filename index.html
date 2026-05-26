@@ -452,7 +452,7 @@ animation:fadeUp .4s ease;
 
 .product-image-box img{
 width:100%;
-max-height:260px;
+height:260px;
 object-fit:contain;
 border-radius:14px;
 background:white;
@@ -597,8 +597,6 @@ BARCODE SYSTEM
 
 </div>
 
-<!-- STATS -->
-
 <div class="stats">
 
 <div class="stat-box glass">
@@ -633,8 +631,6 @@ ONLINE
 
 </div>
 
-<!-- MAIN -->
-
 <div class="main-grid">
 
 <!-- LEFT -->
@@ -660,14 +656,6 @@ Cari Data
 📷 Scan Barcode
 </button>
 
-<button class="btn voice-btn" onclick="startVoiceInput()">
-🎙 Voice Search
-</button>
-
-<button class="btn scan-btn" onclick="stopVoiceInput()">
-🛑 Cek Hasil Voice
-</button>
-
 <div class="ai-loading">
 
 <div class="dot"></div>
@@ -676,14 +664,6 @@ Cari Data
 
 AI READY
 
-</div>
-
-<div id="voiceNotice" class="voice-notice">
-🎤 AI sedang mendengarkan...
-</div>
-
-<div id="voiceResult" class="voice-notice" style="margin-top:10px;">
-🧠 Hasil suara: -
 </div>
 
 <div id="reader"></div>
@@ -738,10 +718,6 @@ const sounds = {
 
 open:new Audio("https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3"),
 
-click:new Audio("https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3"),
-
-ai:new Audio("https://assets.mixkit.co/active_storage/sfx/209/209-preview.mp3"),
-
 success:new Audio("https://assets.mixkit.co/active_storage/sfx/2206/2206-preview.mp3"),
 
 scan:new Audio("https://assets.mixkit.co/active_storage/sfx/2185/2185-preview.mp3"),
@@ -755,29 +731,9 @@ function playSound(type){
 if(sounds[type]){
 
 sounds[type].currentTime = 0;
-
 sounds[type].play();
 
 }
-
-}
-
-/* SPEAK */
-
-function speak(text){
-
-window.speechSynthesis.cancel();
-
-const speech =
-new SpeechSynthesisUtterance(text);
-
-speech.lang = "id-ID";
-
-speech.rate = 1;
-
-speech.pitch = 1.1;
-
-window.speechSynthesis.speak(speech);
 
 }
 
@@ -787,20 +743,6 @@ function openApp(){
 
 playSound("open");
 
-setTimeout(()=>{
-
-playSound("ai");
-
-},300);
-
-setTimeout(()=>{
-
-speak(
-"Selamat datang di Smart Barcode System"
-);
-
-},700);
-
 document.getElementById("welcomePage").style.opacity = "0";
 
 setTimeout(()=>{
@@ -809,9 +751,6 @@ document.getElementById("welcomePage").style.display="none";
 
 document.getElementById("appPage").style.display="flex";
 
-document.getElementById("appPage").style.animation =
-"fadeUp .6s ease";
-
 },500);
 
 }
@@ -819,7 +758,6 @@ document.getElementById("appPage").style.animation =
 /* DATABASE */
 
 let dataExcel = [];
-
 let totalSearch = 0;
 
 const excelURL = "barcode.xlsx";
@@ -875,19 +813,18 @@ ${value || '-'}
 
 }
 
-/* GAMBAR PRODUK OTOMATIS */
+/* GAMBAR PRODUK LANGSUNG */
 
 function createImageBox(desc){
 
-let cleanName = desc
-.toLowerCase()
-.replace(/btl|pcs|gr|kg|ml|lt|pak|box|rt/g,'')
-.replace(/[0-9]/g,'')
+let keyword = desc
+.replace(/[^a-zA-Z0-9 ]/g,' ')
+.replace(/\s+/g,' ')
 .trim();
 
 const imageUrl =
-"https://loremflickr.com/600/400/" +
-encodeURIComponent(cleanName + ",product");
+"https://source.unsplash.com/600x400/?" +
+encodeURIComponent(keyword);
 
 return `
 
@@ -900,20 +837,10 @@ return `
 <img
 src="${imageUrl}"
 alt="${desc}"
-
 loading="lazy"
 
-style="
-width:100%;
-max-height:260px;
-object-fit:contain;
-border-radius:14px;
-background:white;
-padding:10px;
-"
-
 onerror="
-this.src='https://dummyimage.com/600x400/ffffff/000000&text=No+Image';
+this.src='https://images.unsplash.com/photo-1567306226416-28f0efdc88ce?q=80&w=1200';
 "
 
 >
@@ -996,7 +923,6 @@ document.getElementById("result");
 if(!input){
 
 playSound("error");
-
 return;
 
 }
@@ -1016,8 +942,6 @@ String(row.BARCODE).replace(/\s+/g,'') == input
 if(result){
 
 playSound("success");
-
-speak("Data ditemukan");
 
 resultDiv.innerHTML =
 
@@ -1041,8 +965,6 @@ createBox("LPP 03",result.LPP_03_DCI);
 }else{
 
 playSound("error");
-
-speak("Data tidak ditemukan");
 
 resultDiv.innerHTML = `
 
@@ -1104,140 +1026,6 @@ searchPLU(decodedText);
 playSound("error");
 
 });
-
-}
-
-/* VOICE */
-
-let recognition;
-
-let voiceListening = false;
-
-function startVoiceInput(){
-
-if(!('webkitSpeechRecognition' in window)){
-
-alert("Browser tidak mendukung voice search");
-
-return;
-
-}
-
-if(voiceListening) return;
-
-playSound("click");
-
-voiceListening = true;
-
-const notice =
-document.getElementById("voiceNotice");
-
-const voiceResult =
-document.getElementById("voiceResult");
-
-notice.style.display = "block";
-
-voiceResult.style.display = "block";
-
-notice.innerHTML =
-"🎤 AI sedang mendengarkan...";
-
-voiceResult.innerHTML =
-"🧠 Hasil suara: ...";
-
-recognition =
-new webkitSpeechRecognition();
-
-recognition.lang = "id-ID";
-
-recognition.continuous = true;
-
-recognition.interimResults = true;
-
-recognition.maxAlternatives = 1;
-
-recognition.onresult = function(event){
-
-let finalText = "";
-
-for(let i = event.resultIndex; i < event.results.length; i++){
-
-finalText += event.results[i][0].transcript;
-
-}
-
-finalText = finalText
-.replace(/\s+/g,'')
-.replace(/-/g,'')
-.replace(/\./g,'')
-.replace(/,/g,'');
-
-finalText = finalText.toUpperCase();
-
-voiceResult.innerHTML =
-"🧠 Hasil suara: <b>" +
-finalText +
-"</b>";
-
-document.getElementById("searchInput").value =
-finalText;
-
-};
-
-recognition.onerror = function(){
-
-playSound("error");
-
-voiceListening = false;
-
-notice.innerHTML =
-"❌ Voice Error";
-
-};
-
-recognition.onend = function(){
-
-voiceListening = false;
-
-};
-
-recognition.start();
-
-}
-
-/* STOP VOICE */
-
-function stopVoiceInput(){
-
-if(recognition){
-
-recognition.stop();
-
-}
-
-voiceListening = false;
-
-const text =
-document.getElementById("searchInput")
-.value.trim();
-
-document.getElementById("voiceNotice").innerHTML =
-"✅ Voice selesai";
-
-setTimeout(()=>{
-
-document.getElementById("voiceNotice")
-.style.display = "none";
-
-},1200);
-
-if(text){
-
-playSound("success");
-
-searchPLU(text);
-
-}
 
 }
 
