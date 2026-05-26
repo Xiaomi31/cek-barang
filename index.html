@@ -470,6 +470,7 @@ font-weight:600;
 font-size:12px;
 color:#94a3b8;
 margin-top:8px;
+line-height:1.5;
 }
 
 .data-box{
@@ -874,28 +875,27 @@ ${value || '-'}
 
 }
 
-/* GAMBAR PRODUK */
+/* GAMBAR PRODUK OTOMATIS */
 
 function createImageBox(desc){
 
-const query =
-encodeURIComponent(desc);
+let cleanName = desc
+.toLowerCase()
+.replace(/btl|pcs|gr|kg|ml|lt|pak|box|rt/g,'')
+.replace(/[0-9]/g,'')
+.trim();
 
 const imageUrl =
-"https://loremflickr.com/600/400/" + query;
-
-const googleSearch =
-"https://www.google.com/search?tbm=isch&q=" + query;
+"https://loremflickr.com/600/400/" +
+encodeURIComponent(cleanName + ",product");
 
 return `
 
 <div class="product-image-box">
 
 <div class="product-image-title">
-🖼 Contoh Gambar Barang
+🖼 Gambar Produk
 </div>
-
-<a href="${googleSearch}" target="_blank">
 
 <img
 src="${imageUrl}"
@@ -903,16 +903,23 @@ alt="${desc}"
 
 loading="lazy"
 
+style="
+width:100%;
+max-height:260px;
+object-fit:contain;
+border-radius:14px;
+background:white;
+padding:10px;
+"
+
 onerror="
 this.src='https://dummyimage.com/600x400/ffffff/000000&text=No+Image';
 "
 
 >
 
-</a>
-
 <div class="product-image-loading">
-Klik gambar untuk membuka Google Image
+${desc}
 </div>
 
 </div>
