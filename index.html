@@ -878,9 +878,14 @@ ${value || '-'}
 
 function createImageBox(desc){
 
+const query =
+encodeURIComponent(desc);
+
 const imageUrl =
-"https://source.unsplash.com/600x400/?" +
-encodeURIComponent(desc + " product");
+"https://loremflickr.com/600/400/" + query;
+
+const googleSearch =
+"https://www.google.com/search?tbm=isch&q=" + query;
 
 return `
 
@@ -890,18 +895,24 @@ return `
 🖼 Contoh Gambar Barang
 </div>
 
+<a href="${googleSearch}" target="_blank">
+
 <img
 src="${imageUrl}"
 alt="${desc}"
 
+loading="lazy"
+
 onerror="
-this.src='https://via.placeholder.com/600x400?text=No+Image';
+this.src='https://dummyimage.com/600x400/ffffff/000000&text=No+Image';
 "
 
 >
 
+</a>
+
 <div class="product-image-loading">
-AI menampilkan gambar berdasarkan DESKRIPSI barang
+Klik gambar untuk membuka Google Image
 </div>
 
 </div>
