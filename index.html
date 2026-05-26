@@ -330,6 +330,11 @@ background:linear-gradient(135deg,#8b5cf6,#ec4899);
 margin-bottom:10px;
 }
 
+.voice-btn{
+background:linear-gradient(135deg,#f59e0b,#ef4444);
+margin-bottom:10px;
+}
+
 /* LOADING */
 
 .ai-loading{
@@ -362,6 +367,46 @@ animation-delay:.4s;
 40%{transform:scale(1);}
 }
 
+/* VOICE */
+
+.voice-notice{
+margin-top:12px;
+padding:12px;
+border-radius:14px;
+
+background:
+linear-gradient(
+135deg,
+rgba(139,92,246,.15),
+rgba(236,72,153,.15)
+);
+
+border:1px solid rgba(255,255,255,.08);
+
+font-size:13px;
+font-weight:600;
+text-align:center;
+
+display:none;
+
+animation:pulseVoice 1.2s infinite;
+}
+
+@keyframes pulseVoice{
+0%{
+transform:scale(1);
+opacity:.8;
+}
+50%{
+transform:scale(1.02);
+opacity:1;
+}
+100%{
+transform:scale(1);
+opacity:.8;
+}
+}
+
 /* SCANNER */
 
 #reader{
@@ -391,41 +436,6 @@ color:#cbd5e1;
 display:grid;
 grid-template-columns:1fr 1fr;
 gap:10px;
-}
-
-/* PRODUCT IMAGE */
-
-.product-image-box{
-grid-column:1/-1;
-padding:14px;
-border-radius:18px;
-background:rgba(255,255,255,.04);
-border:1px solid rgba(255,255,255,.05);
-text-align:center;
-animation:fadeUp .4s ease;
-}
-
-.product-image-box img{
-width:100%;
-height:260px;
-object-fit:contain;
-border-radius:14px;
-background:white;
-padding:10px;
-}
-
-.product-image-title{
-font-size:12px;
-color:#38bdf8;
-margin-bottom:10px;
-font-weight:600;
-}
-
-.product-image-loading{
-font-size:12px;
-color:#94a3b8;
-margin-top:8px;
-line-height:1.5;
 }
 
 .data-box{
@@ -512,14 +522,15 @@ BARCODE SYSTEM
 <p class="welcome-sub">
 
 ✔ Barcode Scanner AI <br>
-✔ Gambar Produk Otomatis <br>
+✔ Voice Assistant <br>
 ✔ Database Excel <br>
+✔ AI Sound Effects <br>
 ✔ Premium Dashboard
 
 </p>
 
 <button class="enter-btn" onclick="openApp()">
-🚀 Masuk Aplikasi
+🚀 Aplikasi System Barcode
 </button>
 
 </div>
@@ -614,6 +625,14 @@ Cari Data
 📷 Scan Barcode
 </button>
 
+<button class="btn voice-btn" onclick="startVoiceInput()">
+🎙 Voice Search
+</button>
+
+<button class="btn scan-btn" onclick="stopVoiceInput()">
+🛑 Cek Hasil Voice
+</button>
+
 <div class="ai-loading">
 
 <div class="dot"></div>
@@ -622,6 +641,14 @@ Cari Data
 
 AI READY
 
+</div>
+
+<div id="voiceNotice" class="voice-notice">
+🎤 AI sedang mendengarkan...
+</div>
+
+<div id="voiceResult" class="voice-notice" style="margin-top:10px;">
+🧠 Hasil suara: -
 </div>
 
 <div id="reader"></div>
@@ -676,6 +703,10 @@ const sounds = {
 
 open:new Audio("https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3"),
 
+click:new Audio("https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3"),
+
+ai:new Audio("https://assets.mixkit.co/active_storage/sfx/209/209-preview.mp3"),
+
 success:new Audio("https://assets.mixkit.co/active_storage/sfx/2206/2206-preview.mp3"),
 
 scan:new Audio("https://assets.mixkit.co/active_storage/sfx/2185/2185-preview.mp3"),
@@ -689,9 +720,29 @@ function playSound(type){
 if(sounds[type]){
 
 sounds[type].currentTime = 0;
+
 sounds[type].play();
 
 }
+
+}
+
+/* SPEAK */
+
+function speak(text){
+
+window.speechSynthesis.cancel();
+
+const speech =
+new SpeechSynthesisUtterance(text);
+
+speech.lang = "id-ID";
+
+speech.rate = 1;
+
+speech.pitch = 1.1;
+
+window.speechSynthesis.speak(speech);
 
 }
 
@@ -701,6 +752,22 @@ function openApp(){
 
 playSound("open");
 
+setTimeout(()=>{
+
+playSound("ai");
+
+},300);
+
+setTimeout(()=>{
+
+speak(
+"Selamat datang di Smart Barcode System"
+);
+
+},700);
+
+/* TRANSISI */
+
 document.getElementById("welcomePage").style.opacity = "0";
 
 setTimeout(()=>{
@@ -709,6 +776,9 @@ document.getElementById("welcomePage").style.display="none";
 
 document.getElementById("appPage").style.display="flex";
 
+document.getElementById("appPage").style.animation =
+"fadeUp .6s ease";
+
 },500);
 
 }
@@ -716,6 +786,7 @@ document.getElementById("appPage").style.display="flex";
 /* DATABASE */
 
 let dataExcel = [];
+
 let totalSearch = 0;
 
 const excelURL = "barcode.xlsx";
@@ -806,7 +877,20 @@ year:'2-digit'
 
 }
 
+const date = new Date(excelDate);
+
+if(isNaN(date.getTime())){
 return excelDate;
+}
+
+return date.toLocaleDateString(
+'en-GB',
+{
+day:'2-digit',
+month:'short',
+year:'2-digit'
+}
+);
 
 }
 
@@ -826,6 +910,7 @@ document.getElementById("result");
 if(!input){
 
 playSound("error");
+
 return;
 
 }
@@ -834,8 +919,6 @@ totalSearch++;
 
 document.getElementById("searchCount").innerText =
 totalSearch;
-
-/* CARI DATA */
 
 const result = dataExcel.find(row =>
 
@@ -848,74 +931,12 @@ if(result){
 
 playSound("success");
 
-/* DESKRIPSI ASLI */
+speak("Data ditemukan");
 
-const deskripsi = result.DESC || "";
-
-/* KEYWORD DARI DESKRIPSI */
-
-const keyword = deskripsi
-
-.toLowerCase()
-
-.replace(/\(.*?\)/g,'')
-
-.replace(/[0-9]/g,'')
-
-.replace(/pck|pcs|btl|ml|gr|kg|ltr|pak|box/gi,'')
-
-.replace(/\s+/g,' ')
-
-.trim();
-
-/* GAMBAR SESUAI DESKRIPSI */
-
-const imageUrl =
-"https://source.unsplash.com/600x400/?"
-+ encodeURIComponent(keyword);
-
-/* TAMPILKAN */
-
-resultDiv.innerHTML = `
-
-<div class="product-image-box">
-
-<div class="product-image-title">
-🖼 Gambar Produk
-</div>
-
-<img
-src="${imageUrl}"
-
-alt="${deskripsi}"
-
-loading="lazy"
-
-style="
-width:100%;
-height:260px;
-object-fit:contain;
-border-radius:14px;
-background:white;
-padding:10px;
-"
-
-onerror="
-this.src='https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg';
-"
-
->
-
-<div class="product-image-loading">
-${deskripsi}
-</div>
-
-</div>
-
-` +
+resultDiv.innerHTML =
 
 createBox("PLU",result.PLU) +
-createBox("DESKRIPSI",deskripsi) +
+createBox("DESKRIPSI",result.DESC) +
 createBox("SUPCO",result.SUPCO) +
 createBox("SUPPLIER",result.NAMA_SUPPLIER) +
 createBox("KDSB",result.KDSB) +
@@ -932,6 +953,8 @@ createBox("LPP 03",result.LPP_03_DCI);
 }else{
 
 playSound("error");
+
+speak("Data tidak ditemukan");
 
 resultDiv.innerHTML = `
 
@@ -993,6 +1016,152 @@ searchPLU(decodedText);
 playSound("error");
 
 });
+
+}
+
+/* VOICE */
+
+let recognition;
+
+let voiceListening = false;
+
+function startVoiceInput(){
+
+if(!('webkitSpeechRecognition' in window)){
+
+alert("Browser tidak mendukung voice search");
+
+return;
+
+}
+
+if(voiceListening) return;
+
+playSound("click");
+
+voiceListening = true;
+
+const notice =
+document.getElementById("voiceNotice");
+
+const voiceResult =
+document.getElementById("voiceResult");
+
+notice.style.display = "block";
+
+voiceResult.style.display = "block";
+
+notice.innerHTML =
+"🎤 AI sedang mendengarkan...";
+
+voiceResult.innerHTML =
+"🧠 Hasil suara: ...";
+
+recognition =
+new webkitSpeechRecognition();
+
+recognition.lang = "id-ID";
+
+recognition.continuous = true;
+
+recognition.interimResults = true;
+
+recognition.maxAlternatives = 1;
+
+/* HASIL SUARA */
+
+recognition.onresult = function(event){
+
+let finalText = "";
+
+for(let i = event.resultIndex; i < event.results.length; i++){
+
+finalText += event.results[i][0].transcript;
+
+}
+
+/* BERSIHKAN */
+
+finalText = finalText
+.replace(/\s+/g,'')
+.replace(/-/g,'')
+.replace(/\./g,'')
+.replace(/,/g,'');
+
+/* HURUF BESAR */
+
+finalText = finalText.toUpperCase();
+
+voiceResult.innerHTML =
+"🧠 Hasil suara: <b>" +
+finalText +
+"</b>";
+
+document.getElementById("searchInput").value =
+finalText;
+
+};
+
+/* ERROR */
+
+recognition.onerror = function(){
+
+playSound("error");
+
+voiceListening = false;
+
+notice.innerHTML =
+"❌ Voice Error";
+
+};
+
+/* END */
+
+recognition.onend = function(){
+
+voiceListening = false;
+
+};
+
+/* START */
+
+recognition.start();
+
+}
+
+/* STOP VOICE */
+
+function stopVoiceInput(){
+
+if(recognition){
+
+recognition.stop();
+
+}
+
+voiceListening = false;
+
+const text =
+document.getElementById("searchInput")
+.value.trim();
+
+document.getElementById("voiceNotice").innerHTML =
+"✅ Voice selesai";
+
+setTimeout(()=>{
+
+document.getElementById("voiceNotice")
+.style.display = "none";
+
+},1200);
+
+if(text){
+
+playSound("success");
+
+searchPLU(text);
+
+}
 
 }
 
